@@ -1,6 +1,6 @@
 export default function CreateBlog() {
   return (
-    <div>
+    <div className="bg-info-subtle">
     <nav className="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
       <div className="container-fluid">
       
@@ -62,11 +62,23 @@ export default function CreateBlog() {
         </div>
       </div>
     </nav>
-    <div className="mt-5 ms-5 d-flex justify-content-center">
-    <div className="form-floating">
-  <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style= {{height: "300px", width: "600px"}}></textarea>
-  <label htmlFor="floatingTextarea2">Comments</label>
+    <div className="p-3   text-info-emphasis">
+    <div className="mt-5 ms-5 d-flex justify-content-center ">
+    <div className="form-floating ">
+      <div className="d-flex justify-content-center">
+      <input className="bg-warning-subtle ps-2" placeholder="Catagory" style={{border:"none"}}/>
+      </div>
+  <textarea className="form-control p-3 mb-2 bg-warning-subtle text-warning-emphasis" placeholder="Write here" style= {{height: "300px", width: "600px", border: "none"}}></textarea>
+
+  <div className="d-flex justify-content-end">
+  <button type="button" className="btn btn-outline-info my-2">Add</button>
   </div>
+  </div>
+  
+</div>
+</div>
+<div className="mt-4"style={{backgroundColor: "#333", color: "#fff", textAlign: "center", padding: "33px 0", maxWidth:"100%", height:"74px"}}>
+  &copy; 2025 My Blog. All rights reserved.
 </div>
 </div>
   );
