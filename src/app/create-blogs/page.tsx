@@ -1,5 +1,6 @@
 export default function CreateBlog() {
   return (
+    <div>
     <nav className="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
       <div className="container-fluid">
       
@@ -61,5 +62,12 @@ export default function CreateBlog() {
         </div>
       </div>
     </nav>
+    <div className="mt-5 ms-5 d-flex justify-content-center">
+    <div className="form-floating">
+  <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style= {{height: "300px", width: "600px"}}></textarea>
+  <label htmlFor="floatingTextarea2">Comments</label>
+  </div>
+</div>
+</div>
   );
 }
