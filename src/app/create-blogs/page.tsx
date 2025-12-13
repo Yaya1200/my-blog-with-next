@@ -67,9 +67,9 @@ export default function CreateBlog() {
     <div className="mt-5 ms-5 d-flex justify-content-center ">
     <div className="form-floating ">
       <div className="d-flex justify-content-center">
-      <input className="bg-primary-subtle  ps-2" placeholder="Catagory" style={{border:"none"}}/>
+      <input className="bg-primary-subtle  ps-2" placeholder="Catagory" style={{border:"none",color:"#000000ff"}}/>
       </div>
-  <textarea className="form-control p-3 mb-2 bg-primary-subtle text-warning-emphasis" placeholder="Write here" style= {{height: "300px", width: "600px", border: "none"}}></textarea>
+  <textarea className="form-control p-3 mb-2 bg-primary-subtle " placeholder="Write here" style= {{height: "300px", width: "600px", border: "none", color:"#000000ff"}}></textarea>
 
   <div className="d-flex justify-content-end">
   <button type="button" className="btn  my-1 bg-primary-subtle">Add</button>
