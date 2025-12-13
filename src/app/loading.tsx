@@ -1,4 +1,8 @@
 export default function Loading() {
-  // Or a custom loading skeleton component
-  return <p>Loading...</p>
+ 
+  return(
+    <div className="spinner-border text-success" role="status">
+  <span className="visually-hidden">Loading...</span>
+</div>
+  )
 }
