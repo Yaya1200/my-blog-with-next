@@ -25,7 +25,7 @@ async function handleChange() {
     inputValues,
   ]);
   
-  await fetch("api/posts",{
+  await fetch("/api/posts",{
     method: "POST",
     headers:{
       "Content-Type": "application/json"
@@ -66,7 +66,7 @@ async function handleChange() {
          
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link active" href="#" style={{color: "#000000ff"}}>
+              <a className="nav-link active" href="/dashboard" style={{color: "#000000ff"}}>
                 Dashboard
               </a>
             </li>
@@ -92,7 +92,7 @@ async function handleChange() {
 
           <div className="d-flex">
             <img
-              src="profile.webp"
+              src="/profile.webp"
               alt="Profile"
               className="rounded-circle"
               width="50"
@@ -106,7 +106,7 @@ async function handleChange() {
     <div className="mt-5 ms-5 d-flex justify-content-center ">
     <div className="form-floating ">
       <div className="d-flex justify-content-center">
-      <input className="bg-primary-subtle  ps-2" onChange={handleInput} name="title" value={inputValues.title} placeholder="Catagory" style={{border:"none",color:"#000000ff"}}/>
+      <input className="bg-primary-subtle  ps-2" onChange={handleInput} name="title" value={inputValues.title} placeholder="Catagory" style={{border:"none", borderRadius:"5px 5px 0 0",color:"#000000ff"}}/>
       </div>
   <textarea className="form-control p-3 mb-2 bg-primary-subtle" onChange={handleInput} name= "content" value={inputValues.content} placeholder="Write here" style= {{height: "300px", width: "600px", border: "none", color:"#000000ff"}}></textarea>
 
