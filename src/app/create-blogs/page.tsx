@@ -1,12 +1,30 @@
+"useclient";
+import { title } from "process";
+import { SetStateAction, useState } from "react";
 export default function CreateBlog() {
+  const [inputValues, setInputValues] = useState({
+  title: "",
+  content: "",
+});
+function handleInput(e:React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>){
+  const inputname = e.target.name;
+  const inputvalue = e.target.value;
+  setInputValues((prev)=>({
+    ...prev,
+      [inputname]: inputvalue
+    }
+  ))
+}
+
+
   return (
     <div style={{backgroundColor:"#289dc4ff"}}>
     <nav className="navbar navbar-expand-lg" data-bs-theme="dark" style={{backgroundColor:"#70d5f7ff", color: "#000000ff"}}>
   
       <div className="container-fluid">
       
-        <a href="/" className="navbar-brand fw-bold fs-4" style={{color: "#000000ff"}}>
-          My Blog
+        <a href="/" className="logo navbar-brand fw-bold fs-4" style={{color: "#000000ff"}}>
+          Blogify
         </a>
 
        
@@ -67,9 +85,9 @@ export default function CreateBlog() {
     <div className="mt-5 ms-5 d-flex justify-content-center ">
     <div className="form-floating ">
       <div className="d-flex justify-content-center">
-      <input className="bg-primary-subtle  ps-2" placeholder="Catagory" style={{border:"none",color:"#000000ff"}}/>
+      <input className="bg-primary-subtle  ps-2" onChange={handleInput} name="title" placeholder="Catagory" style={{border:"none",color:"#000000ff"}}/>
       </div>
-  <textarea className="form-control p-3 mb-2 bg-primary-subtle " placeholder="Write here" style= {{height: "300px", width: "600px", border: "none", color:"#000000ff"}}></textarea>
+  <textarea className="form-control p-3 mb-2 bg-primary-subtle" onChange={handleInput} name= "content" placeholder="Write here" style= {{height: "300px", width: "600px", border: "none", color:"#000000ff"}}></textarea>
 
   <div className="d-flex justify-content-end">
   <button type="button" className="btn  my-1 bg-primary-subtle">Add</button>
@@ -78,8 +96,8 @@ export default function CreateBlog() {
   
 </div>
 </div>
-<div className="mt-4"style={{backgroundColor:"#70d5f7ff", color: "#000000ff", textAlign: "center", padding: "33px 0", maxWidth:"100%", height:"81px"}}>
-  &copy; 2025 My Blog. All rights reserved.
+<div className="mt-4"style={{backgroundColor:"#70d5f7ff", color: "#000000ff", textAlign: "center", padding: "33px 0", maxWidth:"100%", height:"82px"}}>
+  &copy; 2025 Blogify. All rights reserved.
 </div>
 </div>
   );
