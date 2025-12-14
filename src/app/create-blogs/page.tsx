@@ -1,11 +1,15 @@
 "useclient";
-import { title } from "process";
-import { SetStateAction, useState } from "react";
+
+import {useState } from "react";
 export default function CreateBlog() {
-  const [inputValues, setInputValues] = useState({
+  type inputs = {
+    title:string, content:string
+  }
+  const [inputValues, setInputValues] = useState<inputs>({
   title: "",
   content: "",
 });
+const [storeInputs, setStoreInputs] = useState<any[]>([])
 function handleInput(e:React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>){
   const inputname = e.target.name;
   const inputvalue = e.target.value;
@@ -15,6 +19,13 @@ function handleInput(e:React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>){
     }
   ))
 }
+function handleChange() {
+  setStoreInputs((prev) => [
+    ...prev,
+    inputValues,
+  ]);
+}
+
 
 
   return (
@@ -90,7 +101,7 @@ function handleInput(e:React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>){
   <textarea className="form-control p-3 mb-2 bg-primary-subtle" onChange={handleInput} name= "content" placeholder="Write here" style= {{height: "300px", width: "600px", border: "none", color:"#000000ff"}}></textarea>
 
   <div className="d-flex justify-content-end">
-  <button type="button" className="btn  my-1 bg-primary-subtle">Add</button>
+  <button type="button" className="btn  my-1 bg-primary-subtle" onClick={handleChange}>Add</button>
   </div>
   </div>
   
