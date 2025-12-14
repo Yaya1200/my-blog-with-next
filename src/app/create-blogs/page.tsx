@@ -26,6 +26,7 @@ async function handleChange() {
     ...prev,
     inputValues,
   ]);
+  
   await fetch("api/posts",{
     method: "POST",
     headers:{
@@ -33,7 +34,7 @@ async function handleChange() {
     },
     body: JSON.stringify(storeInputs)
   })
-  setInputValues({title : "", content: ""})
+ setInputValues({title : "", content: ""})  
 
 }
 
