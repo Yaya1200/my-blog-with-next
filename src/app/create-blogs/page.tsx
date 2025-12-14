@@ -1,5 +1,6 @@
 "useclient";
 
+import { title } from "process";
 import {useState } from "react";
 export default function CreateBlog() {
   type inputs = {
@@ -19,11 +20,20 @@ function handleInput(e:React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>){
     }
   ))
 }
-function handleChange() {
+async function handleChange() {
   setStoreInputs((prev) => [
     ...prev,
     inputValues,
   ]);
+  await fetch("api/posts",{
+    method: "POST",
+    headers:{
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(storeInputs)
+  })
+  setInputValues({title : "", content: ""})
+
 }
 
 
