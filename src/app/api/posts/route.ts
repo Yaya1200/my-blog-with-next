@@ -8,8 +8,5 @@ export async function POST(request: Request) {
     title: body.name,
     content: body.content,
   });
-
   return NextResponse.json({ success: true });
-
-
 }
