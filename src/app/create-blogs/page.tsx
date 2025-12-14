@@ -106,9 +106,9 @@ async function handleChange() {
     <div className="mt-5 ms-5 d-flex justify-content-center ">
     <div className="form-floating ">
       <div className="d-flex justify-content-center">
-      <input className="bg-primary-subtle  ps-2" onChange={handleInput} name="title" placeholder="Catagory" style={{border:"none",color:"#000000ff"}}/>
+      <input className="bg-primary-subtle  ps-2" onChange={handleInput} name="title" value={inputValues.title} placeholder="Catagory" style={{border:"none",color:"#000000ff"}}/>
       </div>
-  <textarea className="form-control p-3 mb-2 bg-primary-subtle" onChange={handleInput} name= "content" placeholder="Write here" style= {{height: "300px", width: "600px", border: "none", color:"#000000ff"}}></textarea>
+  <textarea className="form-control p-3 mb-2 bg-primary-subtle" onChange={handleInput} name= "content" value={inputValues.content} placeholder="Write here" style= {{height: "300px", width: "600px", border: "none", color:"#000000ff"}}></textarea>
 
   <div className="d-flex justify-content-end">
   <button type="button" className="btn  my-1 bg-primary-subtle" onClick={handleChange}>Add</button>
