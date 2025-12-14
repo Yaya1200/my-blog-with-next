@@ -1,6 +1,4 @@
 "use client";
-
-
 import { title } from "process";
 import {useState } from "react";
 export default function CreateBlog() {
@@ -32,7 +30,7 @@ async function handleChange() {
     headers:{
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(storeInputs)
+    body: JSON.stringify(inputValues)
   })
  setInputValues({title : "", content: ""})  
 
