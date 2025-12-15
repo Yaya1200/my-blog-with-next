@@ -81,7 +81,7 @@ export default function DashBoard(){
     </nav>
    
         
- <div className={styles.containerholder} style={{minHeight:"438px", cursor:'pointer'}}>
+ <div className={styles.containerholder} style={{minHeight:"438px"}}>
   {data.length === 0 ? (
   <div className="spinner-border text-light" role="status">
   <span className="visually-hidden">Loading...</span>
@@ -89,7 +89,7 @@ export default function DashBoard(){
   ) : (
     <div className={styles.containerhold} >{
     data.map((element, index) => (    
-       <div className="card border-warning mb-3" style={{maxWidth: "20rem", maxHeight:"16rem", overflow:"auto"}} key={index}>
+       <div className="card border-warning mb-3" style={{maxWidth: "20rem", maxHeight:"16rem", overflow:"auto", cursor:'pointer'}} key={index}>
   <div className="card-header" style={{color:"rgba(0, 0, 0, 1)"}}>{element.title} </div>
   <div className="card-body">
     <p className="card-text" style={{color:"rgba(0, 0, 0, 1)"}}>{element.content}</p>
@@ -108,7 +108,7 @@ export default function DashBoard(){
 </div>
 
    <div>
-   <a href="/dashboard/create" type="button" className="btn btn-warning" style={{marginLeft:"1200px"}}>Add</a></div>    
+   <a href="/dashboard/create" type="button" className="btn btn-warning" style={{marginLeft:"1200px",cursor:'pointer'}}>Add</a></div>    
 <div
   style={{
     position:"relative",top: "20px",left: "0", backgroundColor: "#70d5f7ff",color: "#000000ff",textAlign: "center",padding: "20px 0",width: "100%",height: "60px"}}
