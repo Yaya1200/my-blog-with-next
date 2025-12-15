@@ -81,7 +81,7 @@ export default function DashBoard(){
     </nav>
    
         
- <div className={styles.containerholder} style={{minHeight:"485px", cursor:'pointer'}}>
+ <div className={styles.containerholder} style={{minHeight:"448px", cursor:'pointer'}}>
   {data.length === 0 ? (
   <div className="spinner-border text-light" role="status">
   <span className="visually-hidden">Loading...</span>
@@ -107,8 +107,8 @@ export default function DashBoard(){
   )}
 </div>
 
-       
-    
+   <div>
+   <a href="/dashboard/create" type="button" className="btn btn-warning" style={{marginLeft:"1200px"}}>Add</a></div>    
 <div
   style={{
     position:"relative",top: "20px",left: "0", backgroundColor: "#70d5f7ff",color: "#000000ff",textAlign: "center",padding: "20px 0",width: "100%",height: "60px"}}
