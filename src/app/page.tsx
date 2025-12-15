@@ -24,6 +24,12 @@ export default function HomePage(){
       setSearchData(inputValue);
 
     }
+    function SearchContent(){
+      const searchContent = data.filter(element=>{
+        (element.title) = searchData;
+      })
+      setData(searchContent);
+    }
 
   
   return(
@@ -70,7 +76,7 @@ export default function HomePage(){
               onChange={searchTitle}
               value={searchData}
             />
-            <button className="btn btn-outline-success" type="submit">
+            <button className="btn btn-outline-success" type="submit" onClick={SearchContent}>
               Search
             </button>
           </form>
