@@ -26,7 +26,7 @@ export default function HomePage(){
     }
     function SearchContent(){
       const searchContent = data.filter(element=>{
-        (element.title) = searchData;
+        element.title.toLowerCase() == (searchData).toLocaleLowerCase();
       })
       setData(searchContent);
     }
