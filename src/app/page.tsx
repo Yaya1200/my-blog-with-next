@@ -28,7 +28,7 @@ export default function HomePage(){
       const searchContent = data.filter(element=>{
         element.title.toLowerCase() == (searchData).toLocaleLowerCase();
       })
-      setData(searchContent);
+      console.log(searchContent)
     }
 
   
