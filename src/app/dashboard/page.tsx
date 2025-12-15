@@ -48,7 +48,7 @@ export default function DashBoard(){
          
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link active" href="#" style={{color: "#000000ff"}}>
+              <a className="nav-link active" href="/" style={{color: "#000000ff"}}>
                 Home
               </a>
             </li>
