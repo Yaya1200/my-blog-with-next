@@ -80,21 +80,21 @@ export default function DashBoard(){
     </nav>
    
         
-   <div>{data.map((element)=>{
-     <div className="card border-warning mb-3" style={{maxWidth: "18rem"}}>
-  <div className="card-header">{element.title} </div>
-  <div className="card-body">
-    <h5 className="card-title">{prop.title}</h5>
-    <p className="card-text">{prop.content}</p>
-    <button onClick={() => prop.ondelete(prop.id)} className="btn btn-sm ">
-          <DeleteIcon style={{color:"rgba(155, 32, 32, 1)"}}/>
-        </button>
-  </div>
-   })
-    
-  
-  </div>}
-  </div>
+ <div>
+  {data.length === 0 ? (
+    <div className="spinner-border text-secondary" role="status">
+  <span className="visually-hidden">Loading...</span>
+</div>
+  ) : (
+    data.map((element, index) => (
+      <div key={index}>
+        <div>{element.title}</div>
+        <div>{element.content}</div>
+      </div>
+    ))
+  )}
+</div>
+
        
     
 <div
