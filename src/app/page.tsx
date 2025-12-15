@@ -81,7 +81,7 @@ export default function HomePage(){
     </nav>
    
         
- <div className={styles.containerholder} style={{minHeight:"475px"}}>
+ <div className={styles.containerholder} style={{minHeight:"475px",cursor:'pointer'}}>
   {data.length === 0 ? (
   <div className="spinner-border text-light" role="status">
   <span className="visually-hidden">Loading...</span>
