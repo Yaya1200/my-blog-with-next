@@ -80,7 +80,7 @@ export default function DashBoard(){
     </nav>
    
         
- <div>
+ <div className="container-1">
   {data.length === 0 ? (
   <div className="spinner-border text-light" role="status">
   <span className="visually-hidden">Loading...</span>
@@ -90,7 +90,10 @@ export default function DashBoard(){
       <div key={index}>
         <div>{element.title}</div>
         <div>{element.content}</div>
+         <button>edit</button>
+         <button>delete</button>
       </div>
+     
     ))
   )}
 </div>
