@@ -1,5 +1,6 @@
 "use client";
 import { title } from "process";
+import styles from "./DashBoard.module.css";
 import { useEffect, useState } from "react";
 export default function DashBoard(){
   const[data, setData] = useState<any[]>([]);
@@ -20,7 +21,7 @@ export default function DashBoard(){
 
   
   return(
-   <div style={{backgroundColor:"#289dc4ff", height:"580px"}}>
+   <div style={{backgroundColor:"#289dc4ff", height:"100%"}}>
     <nav className="navbar navbar-expand-lg" data-bs-theme="dark" style={{backgroundColor:"#70d5f7ff", color: "#000000ff"}}>
   
       <div className="container-fluid">
@@ -80,21 +81,29 @@ export default function DashBoard(){
     </nav>
    
         
- <div className="container-1">
+ <div className={styles.containerholder}>
   {data.length === 0 ? (
   <div className="spinner-border text-light" role="status">
   <span className="visually-hidden">Loading...</span>
 </div>
   ) : (
-    data.map((element, index) => (
-      <div key={index}>
-        <div>{element.title}</div>
-        <div>{element.content}</div>
-         <button>edit</button>
-         <button>delete</button>
-      </div>
+    <div className={styles.containerhold} >{
+    data.map((element, index) => (    
+       <div className="card border-warning mb-3" style={{maxWidth: "20rem"}} key={index}>
+  <div className="card-header" style={{color:"rgba(0, 0, 0, 1)"}}>{element.title} </div>
+  <div className="card-body">
+    <p className="card-text" style={{color:"rgba(0, 0, 0, 1)"}}>{element.content}</p>
+    <button  className="btn btn-sm " style={{color:"rgba(155, 32, 32, 1)", marginLeft:"190px", marginRight:"10px", padding:"0px", marginTop:"40px"}}>
+       {<img src="/edit.svg" style={{width:"20px", height:"20px"}}/>} </button>
+    <button  className="btn btn-sm " style={{color:"rgba(155, 32, 32, 1)", marginTop:"40px", marginLeft:"5px"}}>
+         {<img src="/delete.svg" style={{width:"20px", height:"20px"}}/>} </button>
+  </div>
+  
+  
+  </div>
      
-    ))
+    ))}
+    </div>
   )}
 </div>
 
@@ -102,7 +111,7 @@ export default function DashBoard(){
     
 <div
   style={{
-    marginTop:"552px",position:"absolute",top: "20px",left: "0", backgroundColor: "#70d5f7ff",color: "#000000ff",textAlign: "center",padding: "20px 0",width: "100%",height: "60px"}}
+    position:"relative",top: "20px",left: "0", backgroundColor: "#70d5f7ff",color: "#000000ff",textAlign: "center",padding: "20px 0",width: "100%",height: "60px"}}
 >&copy; 2025 Blogify. All rights reserved.
 </div>
 
