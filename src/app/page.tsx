@@ -4,6 +4,7 @@ import styles from "./HomePage.module.css";
 import { useEffect, useState } from "react";
 export default function HomePage(){
   const[data, setData] = useState<any[]>([]);
+  const[searchData, setSearchData] = useState("");
   
   useEffect(() => {
     async function BlogPosts() {
@@ -18,6 +19,11 @@ export default function HomePage(){
         console.error("Error fetching data", error);
       }
     } BlogPosts()},[])
+    function searchTitle(e:React.ChangeEvent<HTMLInputElement>){
+      const inputValue = e.target.value;
+      setSearchData(inputValue);
+
+    }
 
   
   return(
@@ -61,6 +67,8 @@ export default function HomePage(){
               type="search"
               placeholder="Search"
               aria-label="Search"
+              onChange={searchTitle}
+              value={searchData}
             />
             <button className="btn btn-outline-success" type="submit">
               Search
