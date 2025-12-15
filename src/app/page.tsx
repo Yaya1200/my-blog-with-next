@@ -20,15 +20,15 @@ export default function HomePage(){
       }
     } BlogPosts()},[])
     function searchTitle(e:React.ChangeEvent<HTMLInputElement>){
-      const inputValue = e.target.value;
+      let inputValue = e.target.value;
       setSearchData(inputValue);
 
     }
     function SearchContent(){
       const searchContent = data.filter(element=>{
-        element.title.toLowerCase() == (searchData).toLocaleLowerCase();
+        return element.title.toLowerCase().includes(searchData.toLowerCase());
       })
-      console.log(searchContent)
+      console.log(searchData)
     }
 
   
