@@ -89,7 +89,7 @@ export default function DashBoard(){
   ) : (
     <div className={styles.containerhold} >{
     data.map((element, index) => (    
-       <div className="card border-warning mb-3" style={{maxWidth: "20rem"}} key={index}>
+       <div className="card border-warning mb-3" style={{maxWidth: "20rem", maxHeight:"16rem", overflow:"auto"}} key={index}>
   <div className="card-header" style={{color:"rgba(0, 0, 0, 1)"}}>{element.title} </div>
   <div className="card-body">
     <p className="card-text" style={{color:"rgba(0, 0, 0, 1)"}}>{element.content}</p>
