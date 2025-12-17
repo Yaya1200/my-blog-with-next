@@ -6,6 +6,7 @@ import { DELETE } from "../api/posts/route";
 export default function DashBoard(){
   const[data, setData] = useState<any[]>([]);
   const[searchData, setSearchData] = useState<string>("")
+  const[deleteData, setDeleteData] = useState("")
   
   useEffect(() => {
     async function BlogPosts() {
@@ -34,11 +35,15 @@ export default function DashBoard(){
       searchContent.length > 0 && data.length > 0 ?  setData(searchContent): alert("The searched content does not exit.")
       
     }
-   async function DeleteFunction(id: string) {
+   async function DeleteFunction(deleteData:string) {
   try {
-    await fetch(`/api/posts/${id}`, {
+  await fetch(`/api/posts/${deleteData}`, {
       method: "DELETE",
     });
+       const filteredData =  data.filter((element)=>{
+        return element._id != deleteData;
+       })
+       setData(filteredData);
     
   } catch (error) {
     console.error(error);
@@ -127,7 +132,7 @@ export default function DashBoard(){
     <p className="card-text" style={{color:"rgba(0, 0, 0, 1)"}}>{element.content}</p>
     <button  className="btn btn-sm " style={{ marginLeft:"180px", marginRight:"10px", padding:"0px", marginTop:"40px"}}>
        {<img src="/edit.svg" style={{width:"20px", height:"20px"}}/>} </button>
-    <button  className="btn btn-sm " style={{ marginTop:"40px", marginLeft:"5px"}} onClick={()=>{DeleteFunction(element._id)}}>
+    <button  className="btn btn-sm " style={{ marginTop:"40px", marginLeft:"5px"}} onClick={()=>{setDeleteData(element._id)}}>
          {<img src="/delete.svg" style={{width:"20px", height:"20px"}}/>} </button>
   </div>
   
