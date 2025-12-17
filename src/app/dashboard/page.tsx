@@ -24,12 +24,11 @@ export default function DashBoard(){
       let inputvalue = e.target.value;
       setSearchData(inputvalue);
      }
-    function SearchContent(e:React.ChangeEvent){
-      e.preventDefault();
-      data.map((element)=>{
-        const searchedContent = element.title.toLowerCase() === searchData?.toLowerCase();
-        searchedContent.length > 0 && data.length > 0 ? setData(searchedContent): alert("The searched content does not exit");
+    function SearchContent(e:React.MouseEventHandler<HTMLButtonElement>){
+      const searchedContent =  data.map((element)=>{
+         return element.title.toLowerCase() === searchData?.toLowerCase();
       })
+       searchedContent.length > 0 && data.length > 0 ? setData(searchedContent): alert("The searched content does not exit");
     }
 
 
