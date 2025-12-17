@@ -1,4 +1,5 @@
 import clientPromise from "@/app/lib/mongodb";
+import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try{
@@ -25,12 +26,12 @@ export async function GET() {
   }
   
 }
-export async function DELETE(id:string) {
+export async function DELETE(request:Request, { params }: { params: { id: string }}) {
   try{
     const client = await clientPromise;
     const db = client.db("my-blog-db");
-    const data = await db.collection("blog-data").deleteOne(id);
-    return NextResponse.json({success:true, data})
+    const data = await db.collection("blog-data").deleteOne({_id: new ObjectId(params.id)});
+    return NextResponse.json({success:true, deleteCount:data.deletedCount})
   }
   catch(error){
     return NextResponse.json({success:false, error:"there is an error deleteing the content"})

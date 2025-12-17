@@ -2,6 +2,7 @@
 import { title } from "process";
 import styles from "./DashBoard.module.css";
 import { useEffect, useState } from "react";
+import { DELETE } from "../api/posts/route";
 export default function DashBoard(){
   const[data, setData] = useState<any[]>([]);
   const[searchData, setSearchData] = useState<string>("")
@@ -33,7 +34,18 @@ export default function DashBoard(){
       searchContent.length > 0 && data.length > 0 ?  setData(searchContent): alert("The searched content does not exit.")
       
     }
+   async function DeleteFunction(id: string) {
+  try {
+    await fetch(`/api/posts/${id}`, {
+      method: "DELETE",
+    });
+    
+  } catch (error) {
+    console.error(error);
+  }
+}
 
+    
 
 
   
@@ -82,7 +94,7 @@ export default function DashBoard(){
               onChange={searchTitle}
               value={searchData}
             />
-            <button className="btn btn-outline-success" type="submit" onClick={SearchContent}>
+            <button className="btn btn-outline-success" type="submit" onClick={()=>{SearchContent}}>
               Search
             </button>
           </form>
@@ -113,9 +125,9 @@ export default function DashBoard(){
   <div className="card-header" style={{color:"rgba(0, 0, 0, 1)"}}>{element.title} </div>
   <div className="card-body">
     <p className="card-text" style={{color:"rgba(0, 0, 0, 1)"}}>{element.content}</p>
-    <button  className="btn btn-sm " style={{color:"rgba(155, 32, 32, 1)", marginLeft:"180px", marginRight:"10px", padding:"0px", marginTop:"40px"}}>
+    <button  className="btn btn-sm " style={{ marginLeft:"180px", marginRight:"10px", padding:"0px", marginTop:"40px"}}>
        {<img src="/edit.svg" style={{width:"20px", height:"20px"}}/>} </button>
-    <button  className="btn btn-sm " style={{color:"rgba(155, 32, 32, 1)", marginTop:"40px", marginLeft:"5px"}}>
+    <button  className="btn btn-sm " style={{ marginTop:"40px", marginLeft:"5px"}} onClick={()=>{DeleteFunction(element._id)}}>
          {<img src="/delete.svg" style={{width:"20px", height:"20px"}}/>} </button>
   </div>
   
