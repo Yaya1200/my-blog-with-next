@@ -6,7 +6,7 @@ import { DELETE } from "../api/posts/route";
 export default function DashBoard(){
   const[data, setData] = useState<any[]>([]);
   const[searchData, setSearchData] = useState<string>("")
-  const[deleteData, setDeleteData] = useState("")
+
   
   useEffect(() => {
     async function BlogPosts() {
@@ -40,10 +40,8 @@ export default function DashBoard(){
   await fetch(`/api/posts/${deleteData}`, {
       method: "DELETE",
     });
-       const filteredData =  data.filter((element)=>{
-        return element._id != deleteData;
-       })
-       setData(filteredData);
+       setData((prev) => prev.filter((element) => element._id !== deleteData));
+
     
   } catch (error) {
     console.error(error);
@@ -99,7 +97,7 @@ export default function DashBoard(){
               onChange={searchTitle}
               value={searchData}
             />
-            <button className="btn btn-outline-success" type="submit" onClick={()=>{SearchContent}}>
+            <button className="btn btn-outline-success" type="button" onClick={SearchContent}>
               Search
             </button>
           </form>
@@ -132,7 +130,7 @@ export default function DashBoard(){
     <p className="card-text" style={{color:"rgba(0, 0, 0, 1)"}}>{element.content}</p>
     <button  className="btn btn-sm " style={{ marginLeft:"180px", marginRight:"10px", padding:"0px", marginTop:"40px"}}>
        {<img src="/edit.svg" style={{width:"20px", height:"20px"}}/>} </button>
-    <button  className="btn btn-sm " style={{ marginTop:"40px", marginLeft:"5px"}} onClick={()=>{setDeleteData(element._id)}}>
+    <button  className="btn btn-sm " style={{ marginTop:"40px", marginLeft:"5px"}} onClick={()=>{DeleteFunction(element._id)}}>
          {<img src="/delete.svg" style={{width:"20px", height:"20px"}}/>} </button>
   </div>
   
