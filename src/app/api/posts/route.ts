@@ -30,7 +30,7 @@ export async function DELETE(request:Request, { params }: { params: { id: string
   try{
     const client = await clientPromise;
     const db = client.db("my-blog-db");
-    const data = db.collection("my-blog-db").deleteOne({_id: new ObjectId(params.id)})
+    const data = await db.collection("blog-data").deleteOne({_id: new ObjectId(params.id)})
     return NextResponse.json({success:true, data})
   }
   catch(error){

@@ -1,8 +1,6 @@
 "use client";
-import { title } from "process";
 import styles from "./DashBoard.module.css";
 import { useEffect, useState } from "react";
-import { DELETE } from "../api/posts/route";
 export default function DashBoard(){
   const[data, setData] = useState<any[]>([]);
   const[searchData, setSearchData] = useState<string>("")
