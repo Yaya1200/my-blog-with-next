@@ -27,7 +27,7 @@ export default function HomePage(){
     function SearchContent(e:React.ChangeEvent){
       e.preventDefault();
       const searchContent = data.filter(element=>{
-        return element.title.toLowerCase() === searchData.toLowerCase();
+        return element.title.toLowerCase().includes(searchData.toLowerCase());
       })
       setSearchData("")
       searchContent.length > 0 && data.length > 0 ?  setData(searchContent): alert("The searched content does not exit.")
