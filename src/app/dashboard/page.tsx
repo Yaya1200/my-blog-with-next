@@ -4,7 +4,7 @@ import styles from "./DashBoard.module.css";
 import { useEffect, useState } from "react";
 export default function DashBoard(){
   const[data, setData] = useState<any[]>([]);
-  const[searchData, setSearchData] = useState<string>()
+  const[searchData, setSearchData] = useState<string>("")
   
   useEffect(() => {
     async function BlogPosts() {
@@ -19,16 +19,19 @@ export default function DashBoard(){
         console.error("Error fetching data", error);
       }
     } BlogPosts()},[])
-     function searchTitle(e:React.ChangeEvent<HTMLInputElement>){
-    
-      let inputvalue = e.target.value;
-      setSearchData(inputvalue);
-     }
-    function SearchContent(e:React.MouseEventHandler<HTMLButtonElement>){
-      const searchedContent =  data.map((element)=>{
-         return element.title.toLowerCase() === searchData?.toLowerCase();
+       function searchTitle(e:React.ChangeEvent<HTMLInputElement>){
+      let inputValue = e.target.value;
+      setSearchData(inputValue);
+
+    }
+    function SearchContent(e:React.ChangeEvent){
+      e.preventDefault();
+      const searchContent = data.filter(element=>{
+        return element.title.toLowerCase() === searchData.toLowerCase();
       })
-       searchedContent.length > 0 && data.length > 0 ? setData(searchedContent): alert("The searched content does not exit");
+      setSearchData("")
+      searchContent.length > 0 && data.length > 0 ?  setData(searchContent): alert("The searched content does not exit.")
+      
     }
 
 
@@ -75,6 +78,7 @@ export default function DashBoard(){
               type="search"
               placeholder="Search"
               aria-label="Search"
+              name = "title"
               onChange={searchTitle}
               value={searchData}
             />
