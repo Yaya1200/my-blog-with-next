@@ -29,6 +29,7 @@ export default function HomePage(){
       const searchContent = data.filter(element=>{
         return element.title.toLowerCase() === searchData.toLowerCase();
       })
+      setSearchData("")
       searchContent.length > 0 && data.length > 0 ?  setData(searchContent): alert("The searched content does not exit.")
       
     }

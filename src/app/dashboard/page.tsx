@@ -4,6 +4,7 @@ import styles from "./DashBoard.module.css";
 import { useEffect, useState } from "react";
 export default function DashBoard(){
   const[data, setData] = useState<any[]>([]);
+  const[searchData, setSearchData] = useState<string>()
   
   useEffect(() => {
     async function BlogPosts() {
@@ -18,6 +19,20 @@ export default function DashBoard(){
         console.error("Error fetching data", error);
       }
     } BlogPosts()},[])
+     function searchTitle(e:React.ChangeEvent<HTMLInputElement>){
+    
+      let inputvalue = e.target.value;
+      setSearchData(inputvalue);
+     }
+    function SearchContent(e:React.ChangeEvent){
+      e.preventDefault();
+      data.map((element)=>{
+        const searchedContent = element.title.toLowerCase() === searchData?.toLowerCase();
+        searchedContent.length > 0 && data.length > 0 ? setData(searchedContent): alert("The searched content does not exit");
+      })
+    }
+
+
 
   
   return(
@@ -61,8 +76,10 @@ export default function DashBoard(){
               type="search"
               placeholder="Search"
               aria-label="Search"
+              onChange={searchTitle}
+              value={searchData}
             />
-            <button className="btn btn-outline-success" type="submit">
+            <button className="btn btn-outline-success" type="submit" onClick={SearchContent}>
               Search
             </button>
           </form>
