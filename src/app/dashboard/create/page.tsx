@@ -78,17 +78,7 @@ async function handleChange() {
           </ul>
 
          
-          <form className="d-flex me-3" role="search">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button className="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
+          
 
           <div className="d-flex">
             <img
@@ -117,7 +107,7 @@ async function handleChange() {
   
 </div>
 </div>
-<div className="mt-4"style={{backgroundColor:"#70d5f7ff", color: "#000000ff", textAlign: "center", padding: "33px 0", maxWidth:"100%", height:"82px"}}>
+<div style={{backgroundColor:"#70d5f7ff", color: "#000000ff", textAlign: "center", padding: "25px 0", maxWidth:"100%", height:"65px", marginTop:"41px"}}>
   &copy; 2025 Blogify. All rights reserved.
 </div>
 </div>
