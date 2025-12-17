@@ -113,7 +113,7 @@ export default function DashBoard(){
   <div className="card-header" style={{color:"rgba(0, 0, 0, 1)"}}>{element.title} </div>
   <div className="card-body">
     <p className="card-text" style={{color:"rgba(0, 0, 0, 1)"}}>{element.content}</p>
-    <button  className="btn btn-sm " style={{color:"rgba(155, 32, 32, 1)", marginLeft:"190px", marginRight:"10px", padding:"0px", marginTop:"40px"}}>
+    <button  className="btn btn-sm " style={{color:"rgba(155, 32, 32, 1)", marginLeft:"180px", marginRight:"10px", padding:"0px", marginTop:"40px"}}>
        {<img src="/edit.svg" style={{width:"20px", height:"20px"}}/>} </button>
     <button  className="btn btn-sm " style={{color:"rgba(155, 32, 32, 1)", marginTop:"40px", marginLeft:"5px"}}>
          {<img src="/delete.svg" style={{width:"20px", height:"20px"}}/>} </button>
