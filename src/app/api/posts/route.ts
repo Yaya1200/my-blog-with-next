@@ -25,3 +25,15 @@ export async function GET() {
   }
   
 }
+export async function DELETE(id:string) {
+  try{
+    const client = await clientPromise;
+    const db = client.db("my-blog-db");
+    const data = await db.collection("blog-data").deleteOne(id);
+    return NextResponse.json({success:true, data})
+  }
+  catch(error){
+    return NextResponse.json({success:false, error:"there is an error deleteing the content"})
+  }
+  
+}
