@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import styles from "./DashBoard.module.css";
 import { useEffect, useState } from "react";
 export default function DashBoard(){
@@ -55,9 +56,9 @@ await fetch(`/api/posts/${deleteData}`, { method: "DELETE" });
   
       <div className="container-fluid">
       
-        <a href="/" className="logo navbar-brand fw-bold fs-4" style={{color: "#000000ff"}}>
+        <Link href="/" className="logo navbar-brand fw-bold fs-4" style={{color: "#000000ff"}}>
           Blogify
-        </a>
+        </Link>
 
        
         <button
@@ -77,9 +78,9 @@ await fetch(`/api/posts/${deleteData}`, { method: "DELETE" });
          
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link active" href="/" style={{color: "#000000ff"}}>
+              <Link className="nav-link active" href="/" style={{color: "#000000ff"}}>
                 Home
-              </a>
+              </Link>
             </li>
           </ul>
 
@@ -140,7 +141,7 @@ await fetch(`/api/posts/${deleteData}`, { method: "DELETE" });
 </div>
 
    <div>
-   <a href="/dashboard/create" type="button" className="btn btn-warning" style={{marginLeft:"1200px",cursor:'pointer'}}>Add</a></div>    
+   <Link href="/dashboard/create" type="button" className="btn btn-warning" style={{marginLeft:"1200px",cursor:'pointer'}}>Add</Link></div>    
 <div
   style={{
     position:"relative",top: "20px",left: "0", backgroundColor: "#70d5f7ff",color: "#000000ff",textAlign: "center",padding: "20px 0",width: "100%",height: "60px"}}
