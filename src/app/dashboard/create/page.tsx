@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { title } from "process";
 import {useState } from "react";
 export default function CreateBlog() {
@@ -44,9 +45,9 @@ async function handleChange() {
   
       <div className="container-fluid">
       
-        <a href="/" className="logo navbar-brand fw-bold fs-4" style={{color: "#000000ff"}}>
+        <Link href="/" className="logo navbar-brand fw-bold fs-4" style={{color: "#000000ff"}}>
           Blogify
-        </a>
+        </Link>
 
        
         <button
@@ -66,14 +67,14 @@ async function handleChange() {
          
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link active" href="/dashboard" style={{color: "#000000ff"}}>
+              <Link className="nav-link active" href="/dashboard" style={{color: "#000000ff"}}>
                 Dashboard
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link active" href="#" style={{color: "#000000ff"}}>
+              <Link className="nav-link active" href="/" style={{color: "#000000ff"}}>
                 Home
-              </a>
+              </Link>
             </li>
           </ul>
 
