@@ -51,7 +51,7 @@ export default function DashBoard() {
 
   return (
     <div style={{ backgroundColor: "#289dc4ff", minHeight: "100vh" }}>
-      {/* NAVBAR */}
+     
       <nav
         className="navbar navbar-expand-lg"
         data-bs-theme="dark"
@@ -112,7 +112,6 @@ export default function DashBoard() {
         </div>
       </nav>
 
-      {/* CONTENT */}
       <div className={styles.containerholder} style={{ minHeight: "438px" }}>
         {data.length === 0 ? (
           <div className="spinner-border text-light" role="status">
@@ -136,7 +135,7 @@ export default function DashBoard() {
                 <div className="card-body d-flex flex-column">
                   <p className="card-text">{element.content}</p>
 
-                  {/* EDIT / DELETE BUTTONS */}
+           
                   <div className="d-flex justify-content-end gap-2 mt-auto">
                     <Link href={`/dashboard/edit/${element._id}`}>
                       <button className="btn btn-sm p-0">
