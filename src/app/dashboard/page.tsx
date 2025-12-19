@@ -126,10 +126,12 @@ await fetch(`/api/posts/${deleteData}`, { method: "DELETE" });
   <div className="card-header" style={{color:"rgba(0, 0, 0, 1)"}}>{element.title} </div>
   <div className="card-body">
     <p className="card-text" style={{color:"rgba(0, 0, 0, 1)"}}>{element.content}</p>
-    <button  className="btn btn-sm " style={{ marginLeft:"180px", marginRight:"10px", padding:"0px", marginTop:"40px"}}>
+    <div style={{position:"absolute"}}>
+    <button  className="btn btn-sm " style={{marginLeft:"180px", marginRight:"10px", padding:"0px", marginTop:"40px"}}>
        {<img src="/edit.svg" style={{width:"20px", height:"20px"}}/>} </button>
     <button  className="btn btn-sm " style={{ marginTop:"40px", marginLeft:"5px"}} onClick={()=>{DeleteFunction(element._id)}}>
          {<img src="/delete.svg" style={{width:"20px", height:"20px"}}/>} </button>
+         </div>
   </div>
   
   
