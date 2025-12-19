@@ -2,6 +2,7 @@
 import { title } from "process";
 import styles from "./HomePage.module.css";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 export default function HomePage(){
   const[data, setData] = useState<any[]>([]);
   const[searchData, setSearchData] = useState("");
@@ -41,9 +42,9 @@ export default function HomePage(){
   
       <div className="container-fluid">
       
-        <a href="/" className="logo navbar-brand fw-bold fs-4" style={{color: "#000000ff"}}>
+        <Link href="/" className="logo navbar-brand fw-bold fs-4" style={{color: "#000000ff"}}>
           Blogify
-        </a>
+        </Link>
 
        
         <button
@@ -63,9 +64,9 @@ export default function HomePage(){
          
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link active" href="/dashboard" style={{color: "#000000ff"}}>
+              <Link className="nav-link active" href="/dashboard" style={{color: "#000000ff"}}>
                 DashBoard
-              </a>
+              </Link>
             </li>
           </ul>
 
