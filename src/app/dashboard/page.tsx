@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 export default function DashBoard() {
   const [data, setData] = useState<any[]>([]);
   const [searchData, setSearchData] = useState<string>("");
+  const [editData, setEditData] = useState(false);
 
   useEffect(() => {
     async function BlogPosts() {
@@ -46,6 +47,23 @@ export default function DashBoard() {
       setData((prev) => prev.filter((element) => element._id !== deleteData));
     } catch (error) {
       console.error(error);
+    }
+  }
+   async function EditFunction(editId:string, editedData:string ) {
+    try{
+      await fetch(`/api/posts/${editId}`,{
+        method:"PATCH",
+        headers: {
+          "Content-Type" : "application/json"
+        },
+
+        body: JSON.stringify(editedData)
+      })
+      alert("The content is edited sucessfully");
+
+    }
+    catch(error){
+      console.log(error)
     }
   }
 
@@ -130,18 +148,19 @@ export default function DashBoard() {
                   position: "relative",
                 }}
               >
-                <div className="card-header">{element.title}</div>
+                <div className="card-header" contentEditable = {editData ? "true" : "false"} >{element.title}</div>
 
                 <div className="card-body d-flex flex-column">
-                  <p className="card-text">{element.content}</p>
+                  <p className="card-text" contentEditable={editData ? "true" : "false"}>{element.content}</p>
 
            
                   <div className="d-flex justify-content-end gap-2 mt-auto">
-                    <Link href={`/dashboard/edit/${element._id}`}>
-                      <button className="btn btn-sm p-0">
-                        <img src="/edit.svg" width={20} height={20} />
+                    
+                      <button className="btn btn-sm p-0"
+                      onClick={()=> {setEditData((prev)=>!prev), EditFunction(element._id, editedData)}}
+                      >
+                        {editData ? <img src="/edit.svg" width={20} height={20} /> : <img src="/edit.svg" width={50} height={50}/>}
                       </button>
-                    </Link>
 
                     <button
                       className="btn btn-sm p-0"
