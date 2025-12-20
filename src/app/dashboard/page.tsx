@@ -3,10 +3,16 @@
 import Link from "next/link";
 import styles from "./DashBoard.module.css";
 import { useEffect, useState } from "react";
+import { title } from "process";
 
 export default function DashBoard() {
   const [data, setData] = useState<any[]>([]);
   const [searchData, setSearchData] = useState<string>("");
+  const [editedData, setEditedData] = useState({
+    title:"",
+    content: "",
+
+  })
   const [editData, setEditData] = useState(false);
 
   useEffect(() => {
@@ -49,7 +55,10 @@ export default function DashBoard() {
       console.error(error);
     }
   }
-   async function EditFunction(editId:string, editedData:string ) {
+   async function EditFunction(editId:string, editedData: {
+    title: string;
+    content: string;
+} ) {
     try{
       await fetch(`/api/posts/${editId}`,{
         method:"PATCH",
@@ -60,6 +69,7 @@ export default function DashBoard() {
         body: JSON.stringify(editedData)
       })
       alert("The content is edited sucessfully");
+      setEditData(false)
 
     }
     catch(error){
@@ -138,6 +148,7 @@ export default function DashBoard() {
         ) : (
           <div className={styles.containerhold}>
             {data.map((element, index) => (
+             
               <div
                 key={index}
                 className="card border-warning mb-3"
@@ -148,16 +159,31 @@ export default function DashBoard() {
                   position: "relative",
                 }}
               >
-                <div className="card-header" contentEditable = {editData ? "true" : "false"} >{element.title}</div>
+                <div className="card-header" contentEditable = {editData} onInput={
+                  (e)=>{
+                    setEditedData((prev)=> ({
+                      ...prev,
+                      title: e.currentTarget.textContent,
+                    }))
+                  }
+                } >{element.title}</div>
 
                 <div className="card-body d-flex flex-column">
-                  <p className="card-text" contentEditable={editData ? "true" : "false"}>{element.content}</p>
+                  <p className="card-text" contentEditable={editData} onInput={
+                    (e) =>{
+                      setEditedData((prev)=>({
+                        ...prev,
+                        content : e.currentTarget.textContent
+                      }))
+                    }
+                  }>{element.content}</p>
 
            
                   <div className="d-flex justify-content-end gap-2 mt-auto">
                     
                       <button className="btn btn-sm p-0"
-                      onClick={()=> {setEditData((prev)=>!prev), EditFunction(element._id, editedData)}}
+                      onClick={()=> {
+                        if(editData) EditFunction(element._id, editedData),setEditData((prev)=>!prev)}}
                       >
                         {editData ? <img src="/edit.svg" width={20} height={20} /> : <img src="/edit.svg" width={50} height={50}/>}
                       </button>
