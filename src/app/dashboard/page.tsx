@@ -193,7 +193,7 @@ export default function DashBoard() {
                         setEditData((prev)=>!prev);
                       }}}
                       >
-                        {editData ? <img src="/edit.svg" width={20} height={20} /> : <img src="/edit.svg" width={50} height={50}/>}
+                        {editData ? <img src="/edited.svg" width={20} height={20} /> : <img src="/edit.svg" width={20} height={20}/>}
                       </button>
 
                     <button
