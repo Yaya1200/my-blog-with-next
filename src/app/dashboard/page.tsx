@@ -14,6 +14,7 @@ export default function DashBoard() {
 
   })
   const [editData, setEditData] = useState(false);
+  const [editId, setEditId] = useState("")
 
   useEffect(() => {
     async function BlogPosts() {
@@ -183,13 +184,14 @@ export default function DashBoard() {
                     
                       <button className="btn btn-sm p-0"
                       onClick={()=> {
-                        if(editData) {EditFunction(element._id, editedData)}
+                        if(editData && editId === element._id) {EditFunction(element._id, editedData)}
                        else {
                             
                             setEditedData({
                               title: element.title,
                               content: element.content,
                             });
+                            setEditId(element._id)
                         setEditData((prev)=>!prev);
                       }}}
                       >
