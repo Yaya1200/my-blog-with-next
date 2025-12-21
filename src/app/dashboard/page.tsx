@@ -222,13 +222,9 @@ export default function DashBoard() {
 
       {/* FOOTER */}
       <footer
+       
         style={{
-          marginTop: "20px",
-          backgroundColor: "#70d5f7ff",
-          textAlign: "center",
-          padding: "20px 0",
-          height: "60px",
-        }}
+    position:"relative",top: "20px",left: "0", backgroundColor: "#70d5f7ff",color: "#000000ff",textAlign: "center",padding: "20px 0",width: "100%",height: "60px"}}
       >
         &copy; 2025 Blogify. All rights reserved.
       </footer>
