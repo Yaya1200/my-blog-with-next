@@ -37,7 +37,7 @@ export default function HomePage(){
 
   
   return(
-   <div style={{backgroundColor:"#289dc4ff", height:"100%"}}>
+   <div style={{backgroundColor:"#289dc4ff", minHeight: "100vh"}}>
     <nav className="navbar navbar-expand-lg" data-bs-theme="dark" style={{backgroundColor:"#70d5f7ff", color: "#000000ff"}}>
   
       <div className="container-fluid">
@@ -99,7 +99,7 @@ export default function HomePage(){
     </nav>
    
         
- <div className={styles.containerholder} style={{minHeight:"475px"}}>
+ <div className={styles.containerholder} style={{minHeight:"475px", backgroundColor:"#289dc4ff"}}>
   {data.length === 0 ? (
   <div className="spinner-border text-light" role="status">
   <span className="visually-hidden">Loading...</span>
