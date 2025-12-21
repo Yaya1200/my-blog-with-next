@@ -184,16 +184,17 @@ export default function DashBoard() {
                     
                       <button className="btn btn-sm p-0"
                       onClick={()=> {
-                        if(editData && editId === element._id) {EditFunction(element._id, editedData)}
+                        setEditId(element._id);
+                        if(editId == element._id){
+                        if(editData) {EditFunction(element._id, editedData)}
                        else {
                             
                             setEditedData({
                               title: element.title,
                               content: element.content,
                             });
-                            setEditId(element._id)
                         setEditData((prev)=>!prev);
-                      }}}
+                      }}}}
                       >
                         {editData ? <img src="/edited.svg" width={20} height={20} /> : <img src="/edit.svg" width={20} height={20}/>}
                       </button>
