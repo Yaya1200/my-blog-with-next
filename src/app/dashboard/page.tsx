@@ -158,7 +158,9 @@ export default function DashBoard() {
                   position: "relative",
                 }}
               >
-                <div className="card-header" contentEditable = {editId === element._id} onInput={
+                <div className="card-header" contentEditable = {editId === element._id}
+                suppressContentEditableWarning={true} 
+                onInput={
                   (e)=>{
                     setEditedData((prev)=> ({
                       ...prev,
@@ -168,7 +170,9 @@ export default function DashBoard() {
                 } >{element.title}</div>
 
                 <div className="card-body d-flex flex-column">
-                  <p className="card-text" contentEditable={editId === element._id} onInput={
+                  <p className="card-text" contentEditable={editId === element._id} 
+                  suppressContentEditableWarning={true} 
+                  onInput={
                     (e) =>{
                       setEditedData((prev)=>({
                         ...prev,
