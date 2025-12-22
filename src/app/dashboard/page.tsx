@@ -68,6 +68,14 @@ export default function DashBoard() {
 
         body: JSON.stringify(editedData)
       })
+      setData((prev)=>(prev.map((element)=>(
+        element._id == editId ?  {
+          ...element,
+          title: editedData.title,
+          content: editedData.content,
+        }:
+        element
+      ))))
       alert("The content is edited sucessfully");
 
     }
@@ -158,28 +166,36 @@ export default function DashBoard() {
                   position: "relative",
                 }}
               >
-                <div className="card-header" contentEditable = {editId === element._id}
-                suppressContentEditableWarning={true} 
-                onInput={
-                  (e)=>{
-                    setEditedData((prev)=> ({
-                      ...prev,
-                      title: e.currentTarget.textContent,
-                    }))
-                  }
-                } >{element.title}</div>
+               <div className="card-body d-flex flex-column">
+                 {editId === element._id ? (
+                          <input
+                            className="form-control"
+                            value={editedData.title}
+                            onChange={(e) =>
+                              setEditedData((prev) => ({
+                                ...prev,
+                                title: e.target.value,
+                              }))
+                            }
+                          />
+                        ) : (
+                          <div className="card-header">{element.title}</div>
+                        )}
+                        {editId === element._id ? (
+                            <textarea
+                              className="form-control"
+                              value={editedData.content}
+                              onChange={(e) =>
+                                setEditedData((prev) => ({
+                                  ...prev,
+                                  content: e.target.value,
+                                }))
+                              }
+                            />
+                          ) : (
+                            <p className="card-text ms-3">{element.content}</p>
+                          )}
 
-                <div className="card-body d-flex flex-column">
-                  <p className="card-text" contentEditable={editId === element._id} 
-                  suppressContentEditableWarning={true} 
-                  onInput={
-                    (e) =>{
-                      setEditedData((prev)=>({
-                        ...prev,
-                        content : e.currentTarget.textContent
-                      }))
-                    }
-                  }>{element.content}</p>
 
            
                   <div className="d-flex justify-content-end gap-2 mt-auto">
