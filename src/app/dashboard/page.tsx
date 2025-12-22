@@ -193,7 +193,7 @@ export default function DashBoard() {
                               }
                             />
                           ) : (
-                            <p className="card-text ms-3">{element.content}</p>
+                            <p className="card-text ms-3 mt-2">{element.content}</p>
                           )}
 
 
