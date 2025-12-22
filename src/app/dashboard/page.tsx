@@ -13,7 +13,6 @@ export default function DashBoard() {
     content: "",
 
   })
-  const [editData, setEditData] = useState(false);
   const [editId, setEditId] = useState("")
 
   useEffect(() => {
@@ -70,7 +69,6 @@ export default function DashBoard() {
         body: JSON.stringify(editedData)
       })
       alert("The content is edited sucessfully");
-      setEditData(false)
 
     }
     catch(error){
@@ -160,7 +158,7 @@ export default function DashBoard() {
                   position: "relative",
                 }}
               >
-                <div className="card-header" contentEditable = {editData} onInput={
+                <div className="card-header" contentEditable = {editId === element._id} onInput={
                   (e)=>{
                     setEditedData((prev)=> ({
                       ...prev,
@@ -170,7 +168,7 @@ export default function DashBoard() {
                 } >{element.title}</div>
 
                 <div className="card-body d-flex flex-column">
-                  <p className="card-text" contentEditable={editData} onInput={
+                  <p className="card-text" contentEditable={editId === element._id} onInput={
                     (e) =>{
                       setEditedData((prev)=>({
                         ...prev,
@@ -193,13 +191,12 @@ export default function DashBoard() {
                               title: element.title,
                               content: element.content,
                             });
-                            setEditData(true)
                           }
                         }}
                       >
                    
 
-                        {editData ? <img src="/edited.svg" width={20} height={20} /> : <img src="/edit.svg" width={20} height={20}/>}
+                        {editId === element._id ? <img src="/edited.svg" width={20} height={20} /> : <img src="/edit.svg" width={20} height={20}/>}
                       </button>
 
                     <button
