@@ -181,21 +181,24 @@ export default function DashBoard() {
 
            
                   <div className="d-flex justify-content-end gap-2 mt-auto">
-                    
-                      <button className="btn btn-sm p-0"
-                      onClick={()=> {
-                        setEditId(element._id);
-                        if(editId == element._id){
-                        if(editData) {EditFunction(element._id, editedData)}
-                       else {
-                            
+                    <button
+                        className="btn btn-sm p-0"
+                        onClick={() => {
+                          if (editId === element._id) {
+                            EditFunction(element._id, editedData);
+                            setEditId("");
+                          } else {
+                            setEditId(element._id);
                             setEditedData({
                               title: element.title,
                               content: element.content,
                             });
-                        setEditData((prev)=>!prev);
-                      }}}}
+                            setEditData(true)
+                          }
+                        }}
                       >
+                   
+
                         {editData ? <img src="/edited.svg" width={20} height={20} /> : <img src="/edit.svg" width={20} height={20}/>}
                       </button>
 
