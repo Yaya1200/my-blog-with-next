@@ -2,14 +2,14 @@ import clientPromise from "@/app/lib/mongodb";
 import { ObjectId } from "mongodb";
 import { NextRequest, NextResponse } from "next/server";
 
-// Unified params type
+
 type Params = { id: string };
 
 export async function DELETE(
   request: NextRequest,
   context: { params: Params | Promise<Params> }
 ) {
-  // Await params if it’s a promise (Next.js 16 requirement)
+  
   const params = await context.params;
   const { id } = params;
 
@@ -38,7 +38,7 @@ export async function PATCH(
   request: NextRequest,
   context: { params: Params | Promise<Params> }
 ) {
-  const params = await context.params; // Await in case Next.js passes a Promise
+  const params = await context.params; 
   const { id } = params;
 
   if (!id) {
