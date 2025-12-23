@@ -2,57 +2,47 @@ import clientPromise from "@/app/lib/mongodb";
 import { ObjectId } from "mongodb";
 import { NextRequest, NextResponse } from "next/server";
 
+// Unified params type
 type Params = { id: string };
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: Params }
+  context: { params: Params | Promise<Params> }
 ) {
+  // Await params if it’s a promise (Next.js 16 requirement)
+  const params = await context.params;
   const { id } = params;
 
   if (!id) {
-    return NextResponse.json(
-      { success: false, error: "ID is required" },
-      { status: 400 }
-    );
+    return NextResponse.json({ success: false, error: "ID is required" }, { status: 400 });
   }
 
   try {
     const client = await clientPromise;
     const db = client.db("my-blog-db");
 
-    const result = await db
-      .collection("blog-data")
-      .deleteOne({ _id: new ObjectId(id) });
+    const result = await db.collection("blog-data").deleteOne({ _id: new ObjectId(id) });
 
     if (result.deletedCount === 0) {
-      return NextResponse.json(
-        { success: false, error: "Post not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ success: false, error: "Post not found" }, { status: 404 });
     }
 
     return NextResponse.json({ success: true, deletedId: id });
   } catch (error) {
     console.error(error);
-    return NextResponse.json(
-      { success: false, error: "Error deleting post" },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: false, error: "Error deleting post" }, { status: 500 });
   }
 }
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: Params }
+  context: { params: Params | Promise<Params> }
 ) {
+  const params = await context.params; // Await in case Next.js passes a Promise
   const { id } = params;
 
   if (!id) {
-    return NextResponse.json(
-      { success: false, error: "ID is required" },
-      { status: 400 }
-    );
+    return NextResponse.json({ success: false, error: "ID is required" }, { status: 400 });
   }
 
   try {
@@ -63,27 +53,16 @@ export async function PATCH(
 
     const result = await db.collection("blog-data").updateOne(
       { _id: new ObjectId(id) },
-      {
-        $set: {
-          title,
-          content,
-        },
-      }
+      { $set: { title, content } }
     );
 
     if (result.matchedCount === 0) {
-      return NextResponse.json(
-        { success: false, error: "Post not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ success: false, error: "Post not found" }, { status: 404 });
     }
 
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error(error);
-    return NextResponse.json(
-      { success: false, error: "Error editing the content" },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: false, error: "Error editing the content" }, { status: 500 });
   }
 }
