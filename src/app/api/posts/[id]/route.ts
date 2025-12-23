@@ -1,14 +1,20 @@
 import clientPromise from "@/app/lib/mongodb";
 import { ObjectId } from "mongodb";
-import { NextResponse } from "next/server";
-import { title } from "process";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function DELETE(request: Request, context: { params: { id: string } }) {
- 
-  const params = await context.params; 
+type Params = { id: string };
 
-  if (!params?.id) {
-    return NextResponse.json({ success: false, error: "ID is required" }, { status: 400 });
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Params }
+) {
+  const { id } = params;
+
+  if (!id) {
+    return NextResponse.json(
+      { success: false, error: "ID is required" },
+      { status: 400 }
+    );
   }
 
   try {
@@ -17,46 +23,67 @@ export async function DELETE(request: Request, context: { params: { id: string }
 
     const result = await db
       .collection("blog-data")
-      .deleteOne({ _id: new ObjectId(params.id) });
+      .deleteOne({ _id: new ObjectId(id) });
 
     if (result.deletedCount === 0) {
-      return NextResponse.json({ success: false, error: "Post not found" }, { status: 404 });
+      return NextResponse.json(
+        { success: false, error: "Post not found" },
+        { status: 404 }
+      );
     }
 
-    return NextResponse.json({ success: true, deletedId: params.id });
+    return NextResponse.json({ success: true, deletedId: id });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ success: false, error: "Error deleting post" }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: "Error deleting post" },
+      { status: 500 }
+    );
   }
 }
 
 export async function PATCH(
-  request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  request: NextRequest,
+  { params }: { params: Params }
 ) {
-  const { id } = await params;
+  const { id } = params;
 
-  try{
-   const client = await clientPromise;
-    const db = client.db("my-blog-db");
-    const {title, content} = await request.json();
-
-    const result = await db
-      .collection("blog-data").updateOne({_id:new ObjectId(id)},{
-        $set:{
-          title: title,
-          content: content,
-        }
-      })
-
-   
-
-    return NextResponse.json({ success: true});
-
-
+  if (!id) {
+    return NextResponse.json(
+      { success: false, error: "ID is required" },
+      { status: 400 }
+    );
   }
-  catch(error){
-    console.log(error);
-    return NextResponse.json({success:false, error:"Error editting the content"},{status:500})
+
+  try {
+    const client = await clientPromise;
+    const db = client.db("my-blog-db");
+
+    const { title, content } = await request.json();
+
+    const result = await db.collection("blog-data").updateOne(
+      { _id: new ObjectId(id) },
+      {
+        $set: {
+          title,
+          content,
+        },
+      }
+    );
+
+    if (result.matchedCount === 0) {
+      return NextResponse.json(
+        { success: false, error: "Post not found" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { success: false, error: "Error editing the content" },
+      { status: 500 }
+    );
   }
 }
