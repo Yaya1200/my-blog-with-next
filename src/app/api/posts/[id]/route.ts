@@ -29,18 +29,20 @@ export async function DELETE(request: Request, context: { params: { id: string }
     return NextResponse.json({ success: false, error: "Error deleting post" }, { status: 500 });
   }
 }
-export async function PATCH(request:Request, context:{params:{id:string}}){
-  const params = await context.params;
-  if(!params?.id){
-    return NextResponse.json({success:false, error:"Id is required"},{status:400})
-  }
+
+export async function PATCH(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const { id } = await params;
+
   try{
    const client = await clientPromise;
     const db = client.db("my-blog-db");
     const {title, content} = await request.json();
 
     const result = await db
-      .collection("blog-data").updateOne({_id:new ObjectId(params.id)},{
+      .collection("blog-data").updateOne({_id:new ObjectId(id)},{
         $set:{
           title: title,
           content: content,
