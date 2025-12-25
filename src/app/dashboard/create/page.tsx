@@ -11,6 +11,7 @@ export default function CreateBlog() {
   content: "",
 });
 const [storeInputs, setStoreInputs] = useState<any[]>([])
+const [toggler, setToggler] = useState(false);
 function handleInput(e:React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>){
   const inputname = e.target.name;
   const inputvalue = e.target.value;
@@ -35,6 +36,9 @@ async function handleChange() {
   })
  setInputValues({title : "", content: ""})  
 
+}
+function Toogle(){
+  setToggler((prev)=> !prev)
 }
 
 
@@ -87,12 +91,12 @@ async function handleChange() {
         borderRadius:"15px",
         border: "none",
         cursor: "pointer",
-        backgroundImage : "url('/toogle-right.svg')",
+        backgroundImage :  toggler ? "url('/toogle-right.svg')": "url('/toogle-left.svg')",
         backgroundSize:"cover",
         backgroundPosition:"center",
         transition: "all 0.3s ease",
         marginRight : "20px"
-      }}
+      }} onClick={Toogle}
           >
           
           </button>
