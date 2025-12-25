@@ -85,7 +85,7 @@ export default function HomePage(){
             </button>
           </form>
 
-          <div className="d-flex">
+          <Link href={"/login"} className="d-flex">
             <img
               src="/profile.webp"
               alt="Profile"
@@ -93,7 +93,7 @@ export default function HomePage(){
               width="50"
               height="50"
             />
-          </div>
+          </Link>
         </div>
       </div>
     </nav>
