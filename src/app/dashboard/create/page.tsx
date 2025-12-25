@@ -79,9 +79,26 @@ async function handleChange() {
           </ul>
 
          
+                    <button
+           
+                style={{
+        width: "40px",
+        height: "25px",
+        borderRadius:"15px",
+        border: "none",
+        cursor: "pointer",
+        backgroundImage : "url('/toogle-right.svg')",
+        backgroundSize:"cover",
+        backgroundPosition:"center",
+        transition: "all 0.3s ease",
+        marginRight : "20px"
+      }}
+          >
           
+          </button>
 
-          <div className="d-flex">
+
+          <Link href={"/login"} className="d-flex">
             <img
               src="/profile.webp"
               alt="Profile"
@@ -89,7 +106,7 @@ async function handleChange() {
               width="50"
               height="50"
             />
-          </div>
+          </Link>
         </div>
       </div>
     </nav>
