@@ -39,6 +39,7 @@ async function handleChange() {
 }
 function Toogle(){
   setToggler((prev)=> !prev)
+  
 }
 
 
@@ -97,7 +98,7 @@ function Toogle(){
         transition: "all 0.3s ease",
         marginRight : "20px"
       }} onClick={Toogle}
-          >
+      >
           
           </button>
 
