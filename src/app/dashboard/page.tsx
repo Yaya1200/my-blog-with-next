@@ -135,7 +135,7 @@ export default function DashBoard() {
                 Search
               </button>
             </form>
-
+            <Link href={"/login"} className="d-flex">
             <img
               src="/profile.webp"
               alt="Profile"
@@ -143,6 +143,7 @@ export default function DashBoard() {
               width="50"
               height="50"
             />
+          </Link>
           </div>
         </div>
       </nav>
