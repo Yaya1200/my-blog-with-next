@@ -15,7 +15,8 @@ export default function DashBoard() {
 
   })
   const [editId, setEditId] = useState("");
-  const {darkMode, toggleTheme}  = useTheme();
+
+  const {darkMode, toggleTheme}:any  = useTheme();
 
   useEffect(() => {
     async function BlogPosts() {
