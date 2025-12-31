@@ -3,9 +3,11 @@ import { title } from "process";
 import styles from "./HomePage.module.css";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useTheme } from "./Theme/page";
 export default function HomePage(){
   const[data, setData] = useState<any[]>([]);
   const[searchData, setSearchData] = useState("");
+  const{darkMode, toggleTheme} = useTheme();
   
   useEffect(() => {
     async function BlogPosts() {
@@ -34,15 +36,19 @@ export default function HomePage(){
       searchContent.length > 0 && data.length > 0 ?  setData(searchContent): alert("The searched content does not exit.")
       
     }
+    function Toogle(){
+  toggleTheme();
+  
+}
 
   
   return(
-   <div style={{backgroundColor:"#289dc4ff", minHeight: "100vh"}}>
-    <nav className="navbar navbar-expand-lg" data-bs-theme="dark" style={{backgroundColor:"#70d5f7ff", color: "#000000ff"}}>
+   <div style={{backgroundColor: darkMode ? "#000000ff":"#289dc4ff", minHeight: "100vh"}}>
+    <nav className="navbar navbar-expand-lg" data-bs-theme="dark" style={{backgroundColor: darkMode ? "#000000ff":"#70d5f7ff", color: darkMode ? "#ffffffff" : "#000000ff"}}>
   
       <div className="container-fluid">
       
-        <Link href="/" className="logo navbar-brand fw-bold fs-4" style={{color: "#000000ff"}}>
+        <Link href="/" className="logo navbar-brand fw-bold fs-4" style={{color: darkMode ? "#ffffffff" : "#000000ff"}}>
           Blogify
         </Link>
 
@@ -64,11 +70,28 @@ export default function HomePage(){
          
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className="nav-link active" href="/dashboard" style={{color: "#000000ff"}}>
+              <Link className="nav-link active" href="/dashboard" style={{color: darkMode ? "#ffffffff" : "#000000ff"}}>
                 DashBoard
               </Link>
             </li>
           </ul>
+           <button
+           
+                style={{
+        width: "40px",
+        height: "25px",
+        borderRadius:"15px",
+        border: "none",
+        cursor: "pointer",
+        backgroundImage :  darkMode ? "url('/toogle-right.svg')": "url('/toogle-left.svg')",
+        backgroundSize:"cover",
+        backgroundPosition:"center",
+        transition: "all 0.3s ease",
+        marginRight : "20px"
+      }} onClick={Toogle}
+      >
+          
+          </button>
 
          
           <form className="d-flex me-3" role="search">
@@ -99,7 +122,7 @@ export default function HomePage(){
     </nav>
    
         
- <div className={styles.containerholder} style={{minHeight:"475px", backgroundColor:"#289dc4ff"}}>
+ <div className={styles.containerholder} style={{minHeight:"475px", backgroundColor: darkMode ? "#000000ff":"#289dc4ff"}}>
   {data.length === 0 ? (
   <div className="spinner-border text-light" role="status">
   <span className="visually-hidden">Loading...</span>
@@ -108,9 +131,9 @@ export default function HomePage(){
     <div className={styles.containerhold} >{
     data.map((element, index) => (    
        <div className="card border-warning mb-3" style={{maxWidth: "20rem", maxHeight:"16rem", overflow:"auto" ,cursor:'pointer'}} key={index}>
-  <div className="card-header" style={{color:"rgba(0, 0, 0, 1)"}}>{element.title} </div>
+  <div className="card-header" style={{color: "#000000ff" }}>{element.title} </div>
   <div className="card-body">
-    <p className="card-text" style={{color:"rgba(0, 0, 0, 1)"}}>{element.content}</p>
+    <p className="card-text" style={{color: "#000000ff"  }}>{element.content}</p>
    
   </div>
   
@@ -126,7 +149,7 @@ export default function HomePage(){
     
 <div
   style={{
-    position:"relative",top: "20px",left: "0", backgroundColor: "#70d5f7ff",color: "#000000ff",textAlign: "center",padding: "20px 0",width: "100%",height: "60px"}}
+    position:"relative",top: "20px",left: "0", backgroundColor: darkMode ? "#000000ff":"#70d5f7ff",color: darkMode ? "#ffffffff" : "#000000ff",textAlign: "center",padding: "20px 0",width: "100%",height: "60px"}}
 >&copy; 2025 Blogify. All rights reserved.
 </div>
 
