@@ -4,6 +4,7 @@ import Link from "next/link";
 import styles from "./DashBoard.module.css";
 import { useEffect, useState } from "react";
 import { title } from "process";
+import { useTheme } from "../Theme/page";
 
 export default function DashBoard() {
   const [data, setData] = useState<any[]>([]);
@@ -13,7 +14,8 @@ export default function DashBoard() {
     content: "",
 
   })
-  const [editId, setEditId] = useState("")
+  const [editId, setEditId] = useState("");
+  const {darkMode, toggleTheme}  = useTheme();
 
   useEffect(() => {
     async function BlogPosts() {
@@ -83,20 +85,24 @@ export default function DashBoard() {
       console.log(error)
     }
   }
+   function Toogle(){
+  toggleTheme();
+  
+}
 
   return (
-    <div style={{ backgroundColor: "#289dc4ff", minHeight: "100vh" }}>
+    <div style={{backgroundColor: darkMode ? "#000000ff":"#289dc4ff", minHeight: "100vh" }}>
      
       <nav
         className="navbar navbar-expand-lg"
         data-bs-theme="dark"
-        style={{ backgroundColor: "#70d5f7ff" }}
+        style={{ backgroundColor: darkMode ? "#000000ff":"#70d5f7ff"}}
       >
         <div className="container-fluid">
           <Link
             href="/"
             className="navbar-brand fw-bold fs-4"
-            style={{ color: "#000" }}
+            style={{ color: darkMode ? "#ffffffff" : "#000000ff" }}
           >
             Blogify
           </Link>
@@ -113,11 +119,29 @@ export default function DashBoard() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto">
               <li className="nav-item">
-                <Link className="nav-link active" href="/" style={{ color: "#000" }}>
+                <Link className="nav-link active" href="/" style={{ color: darkMode ? "#ffffffff" : "#000000ff"}}>
                   Home
                 </Link>
               </li>
             </ul>
+            <button
+           
+                style={{
+        width: "40px",
+        height: "25px",
+        borderRadius:"15px",
+        border: "none",
+        cursor: "pointer",
+        backgroundImage :  darkMode ? "url('/toogle-right.svg')": "url('/toogle-left.svg')",
+        backgroundSize:"cover",
+        backgroundPosition:"center",
+        transition: "all 0.3s ease",
+        marginRight : "20px"
+      }} onClick={Toogle}
+      >
+          
+          </button>
+      
 
             <form className="d-flex me-3" role="search">
               <input
@@ -245,7 +269,7 @@ export default function DashBoard() {
       <footer
        
         style={{
-    position:"relative",top: "20px",left: "0", backgroundColor: "#70d5f7ff",color: "#000000ff",textAlign: "center",padding: "20px 0",width: "100%",height: "60px"}}
+    position:"relative",top: "20px",left: "0", backgroundColor: darkMode ? "#000000ff":"#70d5f7ff",color: darkMode ? "#ffffffff" : "#000000ff",textAlign: "center",padding: "20px 0",width: "100%",height: "60px"}}
       >
         &copy; 2025 Blogify. All rights reserved.
       </footer>
