@@ -1,3 +1,4 @@
+import { ThemeProvider } from "./Theme/page";
 import "./globals.css";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -12,7 +13,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
 </script>
       </head>
-      <body>{children}
+      <body>
+        <ThemeProvider>
+              {children}
+        </ThemeProvider>
+    
          
       </body>
     </html>
