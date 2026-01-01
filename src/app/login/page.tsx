@@ -15,7 +15,7 @@ function Login() {
     username:"",
     password:"",
   });
-  const [intputArray, setInputArray] = useState<LoginForm[]>([]);
+const [inputArray, setInputArray] = useState<LoginForm[]>([]);
   function ChangeLogin(){
    setChangeLogin((prev)=>!prev);
   }
@@ -38,7 +38,7 @@ function Login() {
         username:"",
     password:"",
     });
-    setChangeLogin(true);
+    setChangeLogin(false);
 
   }
   return (
@@ -77,7 +77,7 @@ function Login() {
           placeholder="Username"
           name='username'
           onChange={InputValues}
-          value={inputValues.username}
+          value={inputValues.username || ""}
           style={{
             width: "100%",
             padding: "10px",
@@ -93,7 +93,7 @@ function Login() {
           placeholder="Password"
           name = "password"
           onChange={InputValues}
-          value={inputValues.password}
+          value={inputValues.password || ""}
           style={{
             width: "100%",
             padding: "10px",
