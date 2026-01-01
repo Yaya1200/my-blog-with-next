@@ -34,7 +34,12 @@ function Login() {
     setInputArray((prev)=>(
       [...prev, inputValues]
     ));
-    console.log(inputValues);
+    setInputValues({
+        username:"",
+    password:"",
+    });
+    setChangeLogin(true);
+
   }
   return (
     changeLogin ? <div
@@ -72,6 +77,7 @@ function Login() {
           placeholder="Username"
           name='username'
           onChange={InputValues}
+          value={inputValues.username}
           style={{
             width: "100%",
             padding: "10px",
@@ -87,6 +93,7 @@ function Login() {
           placeholder="Password"
           name = "password"
           onChange={InputValues}
+          value={inputValues.password}
           style={{
             width: "100%",
             padding: "10px",
