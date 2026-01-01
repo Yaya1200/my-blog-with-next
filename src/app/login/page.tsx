@@ -31,7 +31,9 @@ function Login() {
 
   }
   function InputArray(){
-    setInputArray(inputValues);
+    setInputArray((prev)=>(
+      [...prev, inputValues]
+    ));
     console.log(inputValues);
   }
   return (
