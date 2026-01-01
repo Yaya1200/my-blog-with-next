@@ -15,7 +15,7 @@ function Login() {
     username:"",
     password:"",
   });
-  const [intputArray, setInputArray] = useState<any[]>([]);
+  const [intputArray, setInputArray] = useState<LoginForm[]>([]);
   function ChangeLogin(){
    setChangeLogin((prev)=>!prev);
   }
