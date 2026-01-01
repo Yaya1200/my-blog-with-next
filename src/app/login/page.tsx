@@ -1,13 +1,38 @@
 "use client";
 import Link from 'next/link'
-import React from 'react'
+import React, { ChangeEventHandler } from 'react'
 import { useState } from 'react';
 
 
 function Login() {
+  type LoginForm = {
+  username: string;
+  password: string;
+};
+
   const [changeLogin, setChangeLogin] = useState(false);
+  const [inputValues, setInputValues] = useState<LoginForm>({
+    username:"",
+    password:"",
+  });
+  const [intputArray, setInputArray] = useState<any[]>([]);
   function ChangeLogin(){
    setChangeLogin((prev)=>!prev);
+  }
+  function InputValues(e:any){
+    const inputname = e.target.name;
+    const inputvalue = e.target.value;
+    setInputValues((prev)=>({
+      ...prev,
+      [inputname] : inputvalue,
+    }
+      
+    ))
+
+  }
+  function InputArray(){
+    setInputArray(inputValues);
+    console.log(inputValues);
   }
   return (
     changeLogin ? <div
@@ -43,6 +68,8 @@ function Login() {
         <input
           type="text"
           placeholder="Username"
+          name='username'
+          onChange={InputValues}
           style={{
             width: "100%",
             padding: "10px",
@@ -56,6 +83,8 @@ function Login() {
         <input
           type="password"
           placeholder="Password"
+          name = "password"
+          onChange={InputValues}
           style={{
             width: "100%",
             padding: "10px",
@@ -67,6 +96,7 @@ function Login() {
         />
 
         <button
+        onClick={InputArray}
           style={{
             width: "100%",
             padding: "10px",
