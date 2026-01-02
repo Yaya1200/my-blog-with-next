@@ -3,8 +3,6 @@ import Link from 'next/link'
 import React, { ChangeEventHandler } from 'react'
 import { useState } from 'react';
 
-
-
 function Login() {
   type LoginForm = {
   username: string;
@@ -31,7 +29,7 @@ const [inputArray, setInputArray] = useState<LoginForm[]>([]);
     ))
 
   }
-  function InputArray(){
+  async function InputArray(){
     setInputArray((prev)=>(
       [...prev, inputValues]
     ));
@@ -39,6 +37,13 @@ const [inputArray, setInputArray] = useState<LoginForm[]>([]);
         username:"",
     password:"",
     });
+    const res = await fetch("/api/signup",{
+      method: "POST",
+      headers : {"Content-Type": "application/json"},
+      body: JSON.stringify(inputValues)
+    })
+    const data = await res.json();
+    alert(data.message);
     setChangeLogin(false);
 
   }
