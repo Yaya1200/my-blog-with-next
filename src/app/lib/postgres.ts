@@ -1,5 +1,6 @@
 import pkg from "pg";
 const { Pool } = pkg;
+import bcrypt from 'bcrypt';
 
 export const pool = new Pool({
   user: process.env.PG_USERNAME as string,
@@ -11,10 +12,32 @@ export const pool = new Pool({
 async function RunDb(){
   const client = await pool.connect();
   try{
-    await client.query('CREATE TABLE IF NOT EXISTS my-blog (id SERIAL PRIMARY KEY, username TEXT NOT NULL,  password TEXT NOT NULL);');
+    await client.query('CREATE TABLE IF NOT EXISTS my_blog (id SERIAL PRIMARY KEY, username TEXT NOT NULL,  password TEXT NOT NULL);');
   } finally{
     client.release();
   }
 
 }
 RunDb();
+type Input = {
+  username: string,
+  password: string
+}
+
+export async function StoreData({username, password}:Input){
+  const userName = username;
+  const passWord = password;
+  const saltRounds = 10;
+const result = await pool.query('SELECT username FROM my_blog WHERE username = ($1)', [userName]);
+if(result.rows.length > 0){
+ return {success: false, message: "The user already exits"};
+}
+else{
+ const hasedpassword =  await bcrypt.hash(passWord, saltRounds)
+await pool.query('INSERT INTO my_blog (username, password) VALUES ($1, $2)', [userName,  hasedpassword]);
+     return {success:true, message: "The username and password are saved"}
+
+}}
+
+
+
