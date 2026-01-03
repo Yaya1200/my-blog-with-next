@@ -72,7 +72,7 @@ const [loginValues, setLoginValues] = useState<LoginForm>({
     });
     try{
       const res = await fetch("/api/signup",{
-        method : 'POST',
+        method : 'GET',
         headers: {'Content-Type' : "application/json"},
         body: JSON.stringify(loginValues)
       })
