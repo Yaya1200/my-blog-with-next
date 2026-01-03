@@ -37,13 +37,19 @@ const [inputArray, setInputArray] = useState<LoginForm[]>([]);
         username:"",
     password:"",
     });
-    const res = await fetch("/api/signup",{
-      method: "POST",
-      headers : {"Content-Type": "application/json"},
-      body: JSON.stringify(inputValues)
-    })
-    const data = await res.json();
-    alert(data.message);
+   try {
+  const res = await fetch("/api/signup", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(inputValues),
+  });
+
+  const data = await res.json();
+  alert(data.message);
+} catch (error) {
+  alert("Something went wrong");
+}
+
     setChangeLogin(false);
 
   }
