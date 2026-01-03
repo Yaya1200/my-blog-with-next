@@ -38,6 +38,26 @@ await pool.query('INSERT INTO my_blog (username, password) VALUES ($1, $2)', [us
      return {success:true, message: "The username and password are saved"}
 
 }}
+export async function GetData({ username, password }: Input) {
+  const result = await pool.query(
+    'SELECT password FROM my_blog WHERE username = $1',
+    [username]
+  );
+
+  if (result.rows.length === 0) {
+    return { success: false, message: "Unable to login please sign up" };
+  }
+
+  const hashedPassword = result.rows[0].password;
+  const isMatch = await bcrypt.compare(password, hashedPassword);
+
+  if (!isMatch) {
+    return { success: false, message: "Incorrect password" };
+  }
+
+  return { success: true };
+}
+
 
 
 

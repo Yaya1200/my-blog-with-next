@@ -36,7 +36,7 @@ const [loginValues, setLoginValues] = useState<LoginForm>({
   function LoginValues(e:any){
     const inputname = e.target.name;
     const inputvalue = e.target.value;
-    setInputValues((prev)=>({
+    setLoginValues((prev)=>({
       ...prev,
       [inputname] : inputvalue,
     }
@@ -45,10 +45,7 @@ const [loginValues, setLoginValues] = useState<LoginForm>({
 
   }
   async function InputArray(){
-    setInputValues({
-        username:"",
-    password:"",
-    });
+    
    try {
   const res = await fetch("/api/signup", {
     method: "POST",
@@ -61,18 +58,19 @@ const [loginValues, setLoginValues] = useState<LoginForm>({
 } catch (error) {
   alert("Something went wrong");
 }
+setInputValues({
+        username:"",
+    password:"",
+    });
 
     setChangeLogin(false);
 
   }
   async function LoginArray() {
-     setLoginValues({
-        username:"",
-    password:"",
-    });
+     
     try{
-      const res = await fetch("/api/signup",{
-        method : 'GET',
+      const res = await fetch("/api/login",{
+        method : 'POST',
         headers: {'Content-Type' : "application/json"},
         body: JSON.stringify(loginValues)
       })
@@ -82,8 +80,13 @@ const [loginValues, setLoginValues] = useState<LoginForm>({
 
     }
     catch(error){
-      alert('Something went wrong!');
+      alert(`Something went wrong! ${error}`);
     }
+    
+    setLoginValues({
+        username:"",
+    password:"",
+    });
 
     
   }
