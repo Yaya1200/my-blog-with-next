@@ -14,7 +14,11 @@ function Login() {
     username:"",
     password:"",
   });
-const [inputArray, setInputArray] = useState<LoginForm[]>([]);
+
+const [loginValues, setLoginValues] = useState<LoginForm>({
+    username:"",
+    password:"",
+  });
   function ChangeLogin(){
    setChangeLogin((prev)=>!prev);
   }
@@ -29,10 +33,18 @@ const [inputArray, setInputArray] = useState<LoginForm[]>([]);
     ))
 
   }
+  function LoginValues(e:any){
+    const inputname = e.target.name;
+    const inputvalue = e.target.value;
+    setInputValues((prev)=>({
+      ...prev,
+      [inputname] : inputvalue,
+    }
+      
+    ))
+
+  }
   async function InputArray(){
-    setInputArray((prev)=>(
-      [...prev, inputValues]
-    ));
     setInputValues({
         username:"",
     password:"",
@@ -52,6 +64,28 @@ const [inputArray, setInputArray] = useState<LoginForm[]>([]);
 
     setChangeLogin(false);
 
+  }
+  async function LoginArray() {
+     setLoginValues({
+        username:"",
+    password:"",
+    });
+    try{
+      const res = await fetch("/api/signup",{
+        method : 'POST',
+        headers: {'Content-Type' : "application/json"},
+        body: JSON.stringify(loginValues)
+      })
+      const data = await res.json();
+      alert(data.message);
+
+
+    }
+    catch(error){
+      alert('Something went wrong!');
+    }
+
+    
   }
   return (
     changeLogin ? <div
@@ -178,6 +212,9 @@ const [inputArray, setInputArray] = useState<LoginForm[]>([]);
         <input
           type="text"
           placeholder="Username"
+          name='username'
+          value={loginValues.username}
+          onChange={LoginValues}
           style={{
             width: "100%",
             padding: "10px",
@@ -191,6 +228,9 @@ const [inputArray, setInputArray] = useState<LoginForm[]>([]);
         <input
           type="password"
           placeholder="Password"
+          name='password'
+          value={loginValues.password}
+          onChange={LoginValues}
           style={{
             width: "100%",
             padding: "10px",
@@ -213,6 +253,7 @@ const [inputArray, setInputArray] = useState<LoginForm[]>([]);
             cursor: "pointer",
             marginBottom:"10px"
           }}
+          onClick={LoginArray}
         >
           Login
             </button>
