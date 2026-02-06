@@ -101,7 +101,7 @@ export default function DashBoard() {
       >
         <div className="container-fluid">
           <Link
-            href="/"
+            href="/home"
             className="navbar-brand fw-bold fs-4"
             style={{ color: darkMode ? "#ffffffff" : "#000000ff" }}
           >
@@ -120,7 +120,7 @@ export default function DashBoard() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto">
               <li className="nav-item">
-                <Link className="nav-link active" href="/" style={{ color: darkMode ? "#ffffffff" : "#000000ff"}}>
+                <Link className="nav-link active" href="/home" style={{ color: darkMode ? "#ffffffff" : "#000000ff"}}>
                   Home
                 </Link>
               </li>
@@ -160,7 +160,7 @@ export default function DashBoard() {
                 Search
               </button>
             </form>
-            <Link href={"/login"} className="d-flex">
+            <Link href={"/"} className="d-flex">
             <img
               src="/profile.webp"
               alt="Profile"
