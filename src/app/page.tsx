@@ -1,158 +1,315 @@
 "use client";
-import { title } from "process";
-import styles from "./HomePage.module.css";
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { useTheme } from "./Theme/page";
-export default function HomePage(){
-  const[data, setData] = useState<any[]>([]);
-  const[searchData, setSearchData] = useState("");
-  const{darkMode, toggleTheme} = useTheme();
-  
-  useEffect(() => {
-    async function BlogPosts() {
-      try {
-        const result = await fetch("http://localhost:3000/api/posts", {
-          cache: "no-store"
-        });
+import Link from 'next/link'
+import React, { ChangeEventHandler } from 'react'
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-        const json = await result.json();
-        setData(json.data); 
-      } catch (error) {
-        console.error("Error fetching data", error);
-      }
-    } BlogPosts()},[])
-    function searchTitle(e:React.ChangeEvent<HTMLInputElement>){
-      let inputValue = e.target.value;
-      setSearchData(inputValue);
+function Login() {
+  type LoginForm = {
+  username: string;
+  password: string;
+};
 
+  const [changeLogin, setChangeLogin] = useState(false);
+  const [inputValues, setInputValues] = useState<LoginForm>({
+    username:"",
+    password:"",
+  });
+
+const [loginValues, setLoginValues] = useState<LoginForm>({
+    username:"",
+    password:"",
+  });
+  function ChangeLogin(){
+   setChangeLogin((prev)=>!prev);
+  }
+  function InputValues(e:any){
+    const inputname = e.target.name;
+    const inputvalue = e.target.value;
+    setInputValues((prev)=>({
+      ...prev,
+      [inputname] : inputvalue,
     }
-    function SearchContent(e:React.ChangeEvent){
-      e.preventDefault();
-      const searchContent = data.filter(element=>{
-        return element.title.toLowerCase().includes(searchData.toLowerCase());
-      })
-      setSearchData("")
-      searchContent.length > 0 && data.length > 0 ?  setData(searchContent): alert("The searched content does not exit.")
       
+    ))
+
+  }
+  const router = useRouter();
+
+  function LoginValues(e:any){
+    const inputname = e.target.name;
+    const inputvalue = e.target.value;
+    setLoginValues((prev)=>({
+      ...prev,
+      [inputname] : inputvalue,
     }
-    function Toogle(){
-  toggleTheme();
-  
-}
-
-  
-  return(
-   <div style={{backgroundColor: darkMode ? "#000000ff":"#289dc4ff", minHeight: "100vh"}}>
-    <nav className="navbar navbar-expand-lg" data-bs-theme="dark" style={{backgroundColor: darkMode ? "#000000ff":"#70d5f7ff", color: darkMode ? "#ffffffff" : "#000000ff"}}>
-  
-      <div className="container-fluid">
       
-        <Link href="/" className="logo navbar-brand fw-bold fs-4" style={{color: darkMode ? "#ffffffff" : "#000000ff"}}>
-          Blogify
-        </Link>
+    ))
 
-       
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-
-      
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-         
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <Link className="nav-link active" href="/dashboard" style={{color: darkMode ? "#ffffffff" : "#000000ff"}}>
-                DashBoard
-              </Link>
-            </li>
-          </ul>
-           <button
-           
-                style={{
-        width: "40px",
-        height: "25px",
-        borderRadius:"15px",
-        border: "none",
-        cursor: "pointer",
-        backgroundImage :  darkMode ? "url('/toogle-right.svg')": "url('/toogle-left.svg')",
-        backgroundSize:"cover",
-        backgroundPosition:"center",
-        transition: "all 0.3s ease",
-        marginRight : "20px"
-      }} onClick={Toogle}
-      >
-          
-          </button>
-
-         
-          <form className="d-flex me-3" role="search">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              onChange={searchTitle}
-              value={searchData}
-            />
-            <button className="btn btn-outline-success" type="submit" onClick={SearchContent}>
-              Search
-            </button>
-          </form>
-
-          <Link href={"/login"} className="d-flex">
-            <img
-              src="/profile.webp"
-              alt="Profile"
-              className="rounded-circle"
-              width="50"
-              height="50"
-            />
-          </Link>
-        </div>
-      </div>
-    </nav>
-   
-        
- <div className={styles.containerholder} style={{minHeight:"475px", backgroundColor: darkMode ? "#000000ff":"#289dc4ff"}}>
-  {data.length === 0 ? (
-  <div className="spinner-border text-light" role="status">
-  <span className="visually-hidden">Loading...</span>
-</div>
-  ) : (
-    <div className={styles.containerhold} >{
-    data.map((element, index) => (    
-       <div className="card border-warning mb-3" style={{maxWidth: "20rem", maxHeight:"16rem", overflow:"auto" ,cursor:'pointer'}} key={index}>
-  <div className="card-header" style={{color: "#000000ff" }}>{element.title} </div>
-  <div className="card-body">
-    <p className="card-text" style={{color: "#000000ff"  }}>{element.content}</p>
-   
-  </div>
-  
-  
-  </div>
-     
-    ))}
-    </div>
-  )}
-</div>
-
-       
+  }
+  async function InputArray(){
     
-<div
-  style={{
-    position:"relative",top: "20px",left: "0", backgroundColor: darkMode ? "#000000ff":"#70d5f7ff",color: darkMode ? "#ffffffff" : "#000000ff",textAlign: "center",padding: "20px 0",width: "100%",height: "60px"}}
->&copy; 2025 Blogify. All rights reserved.
-</div>
+   try {
+  const res = await fetch("/api/signup", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(inputValues),
+  });
 
-</div>
+  const data = await res.json();
+  alert(data.message);
+} catch (error) {
+  alert("Something went wrong");
+}
+setInputValues({
+        username:"",
+    password:"",
+    });
+
+    setChangeLogin(false);
+
+  }
+  async function LoginArray() {
+     
+    try{
+      const res = await fetch("/api/login",{
+        method : 'POST',
+        headers: {'Content-Type' : "application/json"},
+        body: JSON.stringify(loginValues)
+      })
+      const data = await res.json();
+      if(data.success){
+        router.push('/home');
+      }
+      else{
+        router.push('/');
+        alert("Incorrect password or username");
+
+      }
+
+    }
+    catch(error){
+      alert(`Something went wrong! ${error}`);
+    }
+    
+    setLoginValues({
+        username:"",
+    password:"",
+    });
+
+    
+  }
+  return (
+    changeLogin ? <div
+      style={{
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+       backgroundImage : "url('login-background.jpg')",
+       backgroundSize: "cover",
+       backgroundPosition : "center",
+        fontFamily: "Arial, sans-serif",
+      }}
+    >
+      <div
+        style={{
+          width: "320px",
+          padding: "30px",
+          backgroundColor: "#fff",
+          borderRadius: "10px",
+          boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
+        }}
+      >
+        <h2
+          style={{
+            textAlign: "center",
+            marginBottom: "20px",
+          }}
+        >
+          Sign Up
+        </h2>
+
+        <input
+          type="text"
+          placeholder="Username"
+          name='username'
+          onChange={InputValues}
+          value={inputValues.username || ""}
+          style={{
+            width: "100%",
+            padding: "10px",
+            marginBottom: "15px",
+            borderRadius: "5px",
+            border: "1px solid #ccc",
+            fontSize: "14px",
+          }}
+        />
+
+        <input
+          type="password"
+          placeholder="Password"
+          name = "password"
+          onChange={InputValues}
+          value={inputValues.password || ""}
+          style={{
+            width: "100%",
+            padding: "10px",
+            marginBottom: "20px",
+            borderRadius: "5px",
+            border: "1px solid #ccc",
+            fontSize: "14px",
+          }}
+        />
+
+        <button
+        onClick={InputArray}
+          style={{
+            width: "100%",
+            padding: "10px",
+            backgroundColor: "#121c46ff",
+            color: "#fff",
+            border: "none",
+            borderRadius: "5px",
+            fontSize: "16px",
+            cursor: "pointer",
+            marginBottom:"10px"
+          }}
+        >
+          Sign Up
+            </button>
+              
+
+
+        <p
+          style={{
+            textAlign: "center",
+            marginTop: "15px",
+            fontSize: "14px",
+          }}
+        >
+          want to login? <Link href={"#"} onClick={ChangeLogin}>Login</Link>
+        </p>
+      </div>
+    </div> : <div
+      style={{
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+       backgroundImage : "url('login-background.jpg')",
+       backgroundSize: "cover",
+       backgroundPosition : "center",
+        fontFamily: "Arial, sans-serif",
+      }}
+    >
+      <div
+        style={{
+          width: "320px",
+          padding: "30px",
+          backgroundColor: "#fff",
+          borderRadius: "10px",
+          boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
+        }}
+      >
+        <h2
+          style={{
+            textAlign: "center",
+            marginBottom: "20px",
+          }}
+        >
+          Login
+        </h2>
+
+        <input
+          type="text"
+          placeholder="Username"
+          name='username'
+          value={loginValues.username}
+          onChange={LoginValues}
+          style={{
+            width: "100%",
+            padding: "10px",
+            marginBottom: "15px",
+            borderRadius: "5px",
+            border: "1px solid #ccc",
+            fontSize: "14px",
+          }}
+        />
+
+        <input
+          type="password"
+          placeholder="Password"
+          name='password'
+          value={loginValues.password}
+          onChange={LoginValues}
+          style={{
+            width: "100%",
+            padding: "10px",
+            marginBottom: "20px",
+            borderRadius: "5px",
+            border: "1px solid #ccc",
+            fontSize: "14px",
+          }}
+        />
+
+        <button
+          style={{
+            width: "100%",
+            padding: "10px",
+            backgroundColor: "#121c46ff",
+            color: "#fff",
+            border: "none",
+            borderRadius: "5px",
+            fontSize: "16px",
+            cursor: "pointer",
+            marginBottom:"10px"
+          }}
+          onClick={LoginArray}
+        >
+          Login
+            </button>
+              <button
+      style={{
+        width: "100%",
+        padding: "10px",
+        backgroundColor: "#fff",
+        color: "#000",
+        border: "1px solid #dadce0",
+        borderRadius: "5px",
+        fontSize: "16px",
+        cursor: "pointer",
+        marginTop: "10px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "10px",
+      }}
+    >
+      <img
+        src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+        alt="Google"
+        style={{
+          width: "20px",
+          height: "20px",
+        }}
+      />
+      Continue with Google
+    </button>
+
+
+        <p
+          style={{
+            textAlign: "center",
+            marginTop: "15px",
+            fontSize: "14px",
+          }}
+        >
+          Don’t have an account? <Link href={"#"} onClick={ChangeLogin}> Sign up</Link>
+        </p>
+      </div>
+    </div>
   )
 }
+
+export default Login
