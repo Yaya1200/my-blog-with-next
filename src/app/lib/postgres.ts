@@ -55,7 +55,7 @@ export async function GetData({ username, password }: Input) {
     return { success: false, message: "Incorrect password" };
   }
 
-  return { success: true };
+  return { success: true, message:"successfuly logedin" };
 }
 
 
