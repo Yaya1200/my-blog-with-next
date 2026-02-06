@@ -51,7 +51,7 @@ function Toogle(){
   
       <div className="container-fluid">
       
-        <Link href="/" className="logo navbar-brand fw-bold fs-4" style={{color: darkMode? "#ffffffff" : "#000000ff"}}>
+        <Link href="/home" className="logo navbar-brand fw-bold fs-4" style={{color: darkMode? "#ffffffff" : "#000000ff"}}>
           Blogify
         </Link>
 
@@ -78,7 +78,7 @@ function Toogle(){
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link active" href="/" style={{color: darkMode? "#ffffffff" : "#000000ff"}}>
+              <Link className="nav-link active" href="/home" style={{color: darkMode? "#ffffffff" : "#000000ff"}}>
                 Home
               </Link>
             </li>
@@ -104,7 +104,7 @@ function Toogle(){
           </button>
 
 
-          <Link href={"/login"} className="d-flex">
+          <Link href={"/"} className="d-flex">
             <img
               src="/profile.webp"
               alt="Profile"
