@@ -3,6 +3,8 @@ import Link from 'next/link'
 import React, { ChangeEventHandler } from 'react'
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import {useSession, signIn, signOut} from "next-auth/react"
+const {data: session} = useSession();
 
 function Login() {
   type LoginForm = {
@@ -292,7 +294,7 @@ setInputValues({
         style={{
           width: "20px",
           height: "20px",
-        }}
+        }} onClick={()=>{signIn("google")}}
       />
       Continue with Google
     </button>
