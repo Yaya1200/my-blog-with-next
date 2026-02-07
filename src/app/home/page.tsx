@@ -33,7 +33,7 @@ export default function HomePage(){
         return element.title.toLowerCase().includes(searchData.toLowerCase());
       })
       setSearchData("")
-      searchContent.length > 0 && data.length > 0 ?  setData(searchContent): alert("The searched content does not exit.")
+      searchContent?.length > 0 && data?.length > 0 ?  setData(searchContent): alert("The searched content does not exit.")
       
     }
     function Toogle(){
@@ -123,13 +123,13 @@ export default function HomePage(){
    
         
  <div className={styles.containerholder} style={{minHeight:"475px", backgroundColor: darkMode ? "#000000ff":"#289dc4ff"}}>
-  {data.length === 0 ? (
+  {data?.length === 0 ? (
   <div className="spinner-border text-light" role="status">
   <span className="visually-hidden">Loading...</span>
 </div>
   ) : (
     <div className={styles.containerhold} >{
-    data.map((element, index) => (    
+    data?.map((element, index) => (    
        <div className="card border-warning mb-3" style={{maxWidth: "20rem", maxHeight:"16rem", overflow:"auto" ,cursor:'pointer'}} key={index}>
   <div className="card-header" style={{color: "#000000ff" }}>{element.title} </div>
   <div className="card-body">
