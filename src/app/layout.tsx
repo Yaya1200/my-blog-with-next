@@ -1,6 +1,5 @@
 import { ThemeProvider } from "./Theme/page";
 import "./globals.css";
-import { SessionProvider } from "next-auth/react";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -15,11 +14,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 </script>
       </head>
       <body>
-        <SessionProvider>
+    
         <ThemeProvider>
               {children}
         </ThemeProvider>
-    </SessionProvider>
+
          
       </body>
     </html>
