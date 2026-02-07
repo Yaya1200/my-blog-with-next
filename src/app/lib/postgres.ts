@@ -3,12 +3,14 @@ const { Pool } = pkg;
 import bcrypt from 'bcrypt';
 import { connection } from "next/server";
 import { rejects } from "node:assert";
+const isProd = process.env.NODE_ENV === "production";
 
 export const pool = new Pool({
-  connectionString: process.env.POSTGRES_URL,
-  ssl:{
-    rejectUnauthorized: false},
-  
+  user: process.env.PG_USERNAME as string,
+  host: "localhost",
+  database: process.env.PG_DATABASE as string,
+  password: process.env.PG_PASSWORD as string,
+  port: Number(process.env.PG_PORT), 
 });
 async function RunDb(){
   const client = await pool.connect();
