@@ -174,13 +174,13 @@ export default function DashBoard() {
       </nav>
 
       <div className={styles.containerholder} style={{ minHeight: "438px" }}>
-        {data.length === 0 ? (
+        {data?.length === 0 ? (
           <div className="spinner-border text-light" role="status">
             <span className="visually-hidden">Loading...</span>
           </div>
         ) : (
           <div className={styles.containerhold}>
-            {data.map((element, index) => (
+            {data?.map((element, index) => (
              
               <div
                 key={index}
