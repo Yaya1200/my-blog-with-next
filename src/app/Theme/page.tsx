@@ -1,9 +1,7 @@
 "use client";
-import { createContext, useState, useContext } from "react";
-
-const ThemeContext = createContext<{darkMode:boolean;toggleTheme: ()=>void}|undefined>(undefined);
-
-export default ThemeProvider = ({ children }:any) => {
+import { createContext, useState, useContext, ReactNode } from "react";
+const ThemeContext = createContext<{ darkMode: boolean; toggleTheme: () => void } | undefined>(undefined);
+ function ThemePage({children}:any) {
   const [darkMode, setDarkMode] = useState(false);
 
   const toggleTheme = () => setDarkMode(prev => !prev);
@@ -13,7 +11,11 @@ export default ThemeProvider = ({ children }:any) => {
       {children}
     </ThemeContext.Provider>
   );
+}
+
+export const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (!context) throw new Error("useTheme must be used within ThemePage");
+  return context;
 };
-
-
-export const useTheme = () => useContext(ThemeContext);
+export default ThemePage;
