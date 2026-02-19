@@ -3,7 +3,7 @@ import { title } from "process";
 import styles from "./HomePage.module.css";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useTheme } from "../Theme/page";
+import { useTheme } from "../lib/ThemeProvider";
 export default function HomePage(){
   const[data, setData] = useState<any[]>([]);
   const[searchData, setSearchData] = useState("");
