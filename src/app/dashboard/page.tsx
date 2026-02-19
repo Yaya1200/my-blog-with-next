@@ -37,7 +37,7 @@ export default function DashBoard() {
     setSearchData(e.target.value);
   }
 
-  function SearchContent(e: React.ChangeEvent) {
+  function SearchContent(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     const searchContent = data.filter((element) => {
       return element.title.toLowerCase() === searchData.toLowerCase();
