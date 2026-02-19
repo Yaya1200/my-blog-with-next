@@ -1,8 +1,6 @@
 import pkg from "pg";
 const { Pool } = pkg;
-import bcrypt from 'bcrypt';
-import { connection } from "next/server";
-import { rejects } from "node:assert";
+import bcrypt from 'bcryptjs';
 const isProd = process.env.NODE_ENV === "production";
 
 export const pool = new Pool({
