@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { title } from "process";
 import {useState } from "react";
-import { useTheme } from "@/app/Theme/page";
+import { useTheme } from "@/app/lib/ThemeProvider";
 export default function CreateBlog() {
  const { darkMode, toggleTheme }:any = useTheme();
   type inputs = {
