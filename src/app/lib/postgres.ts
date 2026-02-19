@@ -6,11 +6,10 @@ import { rejects } from "node:assert";
 const isProd = process.env.NODE_ENV === "production";
 
 export const pool = new Pool({
-  user: process.env.PG_USERNAME as string,
-  host: "localhost",
-  database: process.env.PG_DATABASE as string,
-  password: process.env.PG_PASSWORD as string,
-  port: Number(process.env.PG_PORT), 
+  connectionString: process.env.PG_DATABASE_URL,
+  ssl:isProd? {
+    rejectUnauthorized: false,
+  }:false,
 });
 async function RunDb(){
   const client = await pool.connect();
