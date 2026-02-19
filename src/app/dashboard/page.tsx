@@ -4,7 +4,7 @@ import Link from "next/link";
 import styles from "./DashBoard.module.css";
 import { useEffect, useState } from "react";
 import { title } from "process";
-import { useTheme } from "../Theme/page";
+import { useTheme } from "../lib/ThemeProvider";
 
 export default function DashBoard() {
   const [data, setData] = useState<any[]>([]);
