@@ -27,7 +27,7 @@ export default function HomePage(){
       setSearchData(inputValue);
 
     }
-    function SearchContent(e:React.ChangeEvent){
+    function SearchContent(e:React.MouseEvent<HTMLButtonElement>){
       e.preventDefault();
       const searchContent = data.filter(element=>{
         return element.title.toLowerCase().includes(searchData.toLowerCase());
