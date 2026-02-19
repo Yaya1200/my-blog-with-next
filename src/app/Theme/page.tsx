@@ -1,9 +1,9 @@
 "use client";
 import { createContext, useState, useContext } from "react";
 
-const ThemeContext = createContext();
+const ThemeContext = createContext<{darkMode:boolean;toggleTheme: ()=>void}|undefined>(undefined);
 
-export const ThemeProvider = ({ children }:any) => {
+export default ThemeProvider = ({ children }:any) => {
   const [darkMode, setDarkMode] = useState(false);
 
   const toggleTheme = () => setDarkMode(prev => !prev);
