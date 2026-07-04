@@ -1,7 +1,9 @@
 .containerhold{
   display:grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap:10px;
-  margin: 10px;
-  
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:16px;
+  padding: 20px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
