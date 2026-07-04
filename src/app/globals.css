@@ -1,0 +1,35 @@
+:root{
+	--max-width: 1200px;
+	--page-padding: 20px;
+	--bg: #f7f8fa;
+	--card-bg: #ffffff;
+}
+
+*{box-sizing: border-box;}
+html,body{height:100%;}
+body{
+	margin:0;
+	padding:0;
+	font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+	background: var(--bg);
+	color: #0f172a;
+}
+
+main{
+	max-width: var(--max-width);
+	margin: 0 auto;
+	padding: var(--page-padding);
+}
+
+.card{
+	background: var(--card-bg);
+	border-radius: 8px;
+	box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+	padding: 16px;
+}
+
+/* Utility to keep consistent outer spacing */
+.page-padding { padding-left: var(--page-padding); padding-right: var(--page-padding); }
+
+/* Make images responsive by default */
+img{max-width:100%;height:auto;display:block}
